@@ -8,31 +8,37 @@
     <CheckBox
         android:id="@+id/cbGoalie"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.08"
-        android:text="Goalie" />
+        android:layout_height="@android:dimen/notification_large_icon_width"
+        android:layout_weight="0.18"
+        android:height="@android:dimen/thumbnail_height"
+        android:text="Goalie"
+        android:textSize="24sp" />
 
     <CheckBox
         android:id="@+id/cbMidfielder"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.08"
+        android:layout_height="@android:dimen/notification_large_icon_width"
+        android:layout_weight="0.18"
         android:allowUndo="false"
         android:text="Midfielder"
+        android:textSize="24sp"
         tools:textDirection="locale" />
 
     <CheckBox
         android:id="@+id/cbDefender"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.08"
-        android:text="Defender" />
+        android:layout_height="@android:dimen/notification_large_icon_width"
+        android:layout_weight="0.19"
+        android:text="Defender"
+        android:textSize="24sp" />
 
     <CheckBox
         android:id="@+id/cbForward"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_weight="0.08"
-        android:text="Forward" />
+        android:layout_height="@android:dimen/notification_large_icon_width"
+        android:layout_weight="0.20"
+        android:height="@android:dimen/thumbnail_height"
+        android:text="Forward"
+        android:textSize="24sp" />
 
 </LinearLayout>

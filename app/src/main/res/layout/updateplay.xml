@@ -7,5 +7,5 @@
     <DatePicker
         android:id="@+id/datePicker2"
         android:layout_width="match_parent"
-        android:layout_height="405dp" />
+        android:layout_height="200dp" />
 </LinearLayout>
