@@ -1,5 +1,6 @@
 package Data;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
 
 /**
@@ -8,13 +9,14 @@ import java.util.TreeSet;
 
 public class Database {
     private static Database reference = null;
-    TreeSet<Player> tsPlayer = null;
-    TreeSet<Game> tsGame = null;
+    private TreeSet<Player> tsPlayer = null;
+    private TreeSet<Game> tsGame = null;
 
     public Database()
     {
         super();
         tsPlayer = new TreeSet<>();
+        tsGame = new TreeSet<>();
     }
 
     public Database getInstance()
@@ -31,8 +33,29 @@ public class Database {
     {
         tsPlayer.add(p);
     }
+
     public void removePlayer(Player p)
     {
         tsPlayer.remove(p);
+    }
+
+    public void addGame(Game g)
+    {
+        tsGame.add(g);
+    }
+
+    public void removeGame(Game g)
+    {
+        tsGame.remove(g);
+    }
+
+    public ArrayList<Player> getPlayers()
+    {
+        return new ArrayList<>(tsPlayer);
+    }
+
+    public ArrayList<Game> getGames()
+    {
+        return new ArrayList<>(tsGame);
     }
 }
