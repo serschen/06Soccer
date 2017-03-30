@@ -8,12 +8,13 @@ import java.util.TreeSet;
 
 public class Database {
     private static Database reference = null;
-    TreeSet<Spieler> tsSpieler = null;
+    TreeSet<Player> tsPlayer = null;
+    TreeSet<Game> tsGame = null;
 
     public Database()
     {
         super();
-        tsSpieler = new TreeSet<>();
+        tsPlayer = new TreeSet<>();
     }
 
     public Database getInstance()
@@ -26,5 +27,12 @@ public class Database {
         return reference;
     }
 
-
+    public void addPlayer(Player p)
+    {
+        tsPlayer.add(p);
+    }
+    public void removePlayer(Player p)
+    {
+        tsPlayer.remove(p);
+    }
 }
