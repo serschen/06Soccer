@@ -8,23 +8,11 @@ import java.util.Date;
  * Created by anton on 27.03.2017.
  */
 
-public class Spiel implements Comparable<Spiel>{
+public class Game implements Comparable<Game>{
     private int id = 0;
     private Date date = null;
-    private Team team1 = null;
-    private Team team2 = null;
     private int goalsShotTeam1 = 0;
     private int goalsShotTeam2 = 0;
-
-    public Spiel()
-    {
-        super();
-    }
-
-    public Spiel(int id)
-    {
-        setId(id);
-    }
 
     public int getId() {
         return id;
@@ -55,27 +43,11 @@ public class Spiel implements Comparable<Spiel>{
     }
 
     public void setGoalsShotTeam2(int goalsShotTeam2) {
-        this.goalsShotTeam2 = goalsShotTeam2;
-    }
-
-    public Team getTeam1() {
-        return team1;
-    }
-
-    public void setTeam1(Team team1) {
-        this.team1 = team1;
-    }
-
-    public Team getTeam2() {
-        return team2;
-    }
-
-    public void setTeam2(Team team2) {
-        this.team2 = team2;
+        goalsShotTeam2 = goalsShotTeam2;
     }
 
     @Override
-    public int compareTo(@NonNull Spiel o) {
+    public int compareTo(@NonNull Game o) {
         return this.getDate().compareTo(o.getDate());
     }
 }
