@@ -7,5 +7,5 @@ package com.soccer.a06soccer.pkgData;
  */
 
 public class Database {
-    private TreeSet<Spieler>
+
 }
