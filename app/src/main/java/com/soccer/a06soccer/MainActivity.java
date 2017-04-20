@@ -7,7 +7,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import Data.Database;
-
+//192.168.194.27:8080
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Database db = null;
     Button btnPlayer = null;
