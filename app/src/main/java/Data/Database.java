@@ -19,7 +19,7 @@ public class Database {
         tsGame = new TreeSet<>();
     }
 
-    public Database getInstance()
+    public static Database getInstance()
     {
         if(reference == null)
         {
