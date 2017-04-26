@@ -10,7 +10,6 @@ import android.widget.TextView;
 import Data.Database;
 //192.168.194.27:8080
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Database db = null;
     Button btnPlayer = null;
     Button btnGames = null;
     Button btnStats = null;
@@ -22,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         try{
-            db = Database.getInstance();
             getAllViews();
             registrateEventHandlers();
         }
