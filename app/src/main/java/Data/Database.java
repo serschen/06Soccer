@@ -17,6 +17,7 @@ public class Database {
         super();
         tsPlayer = new TreeSet<>();
         tsGame = new TreeSet<>();
+        defaultPlayers();
     }
 
     public static Database getInstance()
@@ -57,5 +58,12 @@ public class Database {
     public ArrayList<Game> getGames()
     {
         return new ArrayList<>(tsGame);
+    }
+
+    public void defaultPlayers()
+    {
+        tsPlayer.add(new Player(1, "Peter", null));
+        tsPlayer.add(new Player(2, "Hans", null));
+        tsPlayer.add(new Player(3, "OG", null));
     }
 }

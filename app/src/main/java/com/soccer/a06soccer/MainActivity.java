@@ -1,5 +1,6 @@
 package com.soccer.a06soccer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -7,9 +8,8 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import Data.Database;
-
+//192.168.194.27:8080
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    Database db = null;
     Button btnPlayer = null;
     Button btnGames = null;
     Button btnStats = null;
@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
 
         try{
-            db = Database.getInstance();
             getAllViews();
             registrateEventHandlers();
         }
@@ -50,7 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == btnPlayer)
         {
-            messageLine.setText("Player");
+            Intent intent = new Intent(this, playergui_main.class);
+            startActivity(intent);
         }
         else if(v == btnGames)
         {

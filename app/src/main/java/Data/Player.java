@@ -20,6 +20,15 @@ public class Player implements Comparable<Player> {
         tsPosition = new TreeSet<>();
     }
 
+    public Player(int id, String name, TreeSet<Position> positions)
+    {
+        super();
+        tsPosition = new TreeSet<>();
+        setID(id);
+        setName(name);
+        setTsPositions(positions);
+    }
+
     public int getID() {
         return ID;
     }
@@ -62,6 +71,11 @@ public class Player implements Comparable<Player> {
         {
             tsPosition.remove(position);
         }
+    }
+
+    public String toString()
+    {
+        return getID() + " | " + getName();
     }
 
     @Override
