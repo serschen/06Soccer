@@ -1,5 +1,6 @@
 package com.soccer.a06soccer;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +51,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         if(v == btnPlayer)
         {
-            messageLine.setText("Player");
+            Intent intent = new Intent(this, playergui_main.class);
+            startActivity(intent);
         }
         else if(v == btnGames)
         {
