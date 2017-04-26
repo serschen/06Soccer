@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -18,7 +19,7 @@ import Data.Player;
  * Created by anton on 26.04.2017.
  */
 
-public class playergui_main extends AppCompatActivity implements View.OnClickListener {
+public class playergui_main extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
     private Button btnAdd = null;
     private Button btnRemove = null;
     private Button btnUpdate = null;
@@ -49,7 +50,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         btnRemove = (Button) this.findViewById(R.id.btnRemove);
         btnUpdate = (Button) this.findViewById(R.id.btnUpdate);
         txtMessage = (TextView) this.findViewById(R.id.txtMessage);
-        playerList = (ListView) this.findViewById(R.id.listViewPlayer);
+        playerList = (ListView) this.findViewById(R.id.listView);
     }
 
     public void registrateEventHandlers()
@@ -57,6 +58,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         btnAdd.setOnClickListener(this);
         btnRemove.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
+        playerList.setOnItemSelectedListener(this);
     }
 
     @Override
@@ -79,9 +81,19 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     {
         ArrayAdapter<Player> adapter = new ArrayAdapter<>(
                 this,
-                android.R.layout.simple_spinner_item,
+                android.R.layout.simple_list_item_1,
                 database.getPlayers()
         );
         playerList.setAdapter(adapter);
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
     }
 }

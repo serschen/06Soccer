@@ -11,6 +11,7 @@ public class Database {
     private static Database reference = null;
     private TreeSet<Player> tsPlayer = null;
     private TreeSet<Game> tsGame = null;
+    private int id = 0;
 
     public Database()
     {
@@ -62,8 +63,14 @@ public class Database {
 
     public void defaultPlayers()
     {
-        tsPlayer.add(new Player(1, "Peter", null));
-        tsPlayer.add(new Player(2, "Hans", null));
-        tsPlayer.add(new Player(3, "OG", null));
+        tsPlayer.add(new Player(getId(), "Peter", null));
+        tsPlayer.add(new Player(getId(), "Hans", null));
+        tsPlayer.add(new Player(getId(), "OG", null));
+    }
+
+    private int getId()
+    {
+        id++;
+        return id;
     }
 }
