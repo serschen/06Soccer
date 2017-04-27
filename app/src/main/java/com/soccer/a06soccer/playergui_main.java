@@ -48,7 +48,9 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         }
         catch(Exception ex)
         {
-            txtMessage.setText(ex.getMessage());
+            Toast.makeText(getApplicationContext(),
+                    ex.getMessage(), Toast.LENGTH_LONG)
+                    .show();
         }
     }
 
@@ -78,7 +80,9 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             Player player = new Player(database.getId(), "asd", null);
             database.addPlayer(player);
             updatePlayerList();
-            txtMessage.setText(player.getName() + " added");
+            Toast.makeText(getApplicationContext(),
+                    player.getName() + " added", Toast.LENGTH_LONG)
+                    .show();
         }
         else if(v == btnRemove)
         {
@@ -93,7 +97,9 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             }
             else
             {
-                txtMessage.setText("No Player selected");
+                Toast.makeText(getApplicationContext(),
+                        "No Player selected", Toast.LENGTH_LONG)
+                        .show();
             }
         }
     }
@@ -120,18 +126,24 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             if(curPosition != -1)
             {
                 database.removePlayer(curPlayer);
-                txtMessage.setText(curPlayer.getName() + " removed");
+                Toast.makeText(getApplicationContext(),
+                        curPlayer.getName() + " removed", Toast.LENGTH_LONG)
+                        .show();
                 updatePlayerList();
                 curPosition = -1;
             }
             else
             {
-                txtMessage.setText("No Player selected");
+                Toast.makeText(getApplicationContext(),
+                        "No Player selected", Toast.LENGTH_LONG)
+                        .show();
             }
         }
         catch(Exception ex)
         {
-            txtMessage.setText(ex.getMessage());
+            Toast.makeText(getApplicationContext(),
+                    ex.getMessage(), Toast.LENGTH_LONG)
+                    .show();
         }
 
     }

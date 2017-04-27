@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import Data.Database;
 //192.168.194.27:8080
@@ -26,7 +27,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         catch(Exception ex)
         {
-
+            Toast.makeText(getApplicationContext(),
+                    ex.getMessage(), Toast.LENGTH_LONG)
+                    .show();
         }
     }
 
