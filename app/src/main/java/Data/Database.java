@@ -12,6 +12,7 @@ public class Database {
     private TreeSet<Player> tsPlayer = null;
     private TreeSet<Game> tsGame = null;
     private int id = 0;
+    private Player currentPlayer = null;
 
     public Database()
     {
@@ -72,5 +73,13 @@ public class Database {
     {
         id++;
         return id;
+    }
+
+    public Player getCurrentPlayer() {
+        return currentPlayer;
+    }
+
+    public void setCurrentPlayer(Player currentPlayer) {
+        this.currentPlayer = currentPlayer;
     }
 }

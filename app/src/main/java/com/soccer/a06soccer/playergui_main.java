@@ -1,5 +1,6 @@
 package com.soccer.a06soccer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
@@ -31,7 +32,8 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     private TextView txtMessage = null;
     private Database database = null;
     private ListView playerList = null;
-    private Player curPlayer = null;
+    private int curPosition = -1;
+    private ArrayAdapter<Player> adapter = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,32 +75,31 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if(v == btnAdd)
         {
-            txtMessage.setText("add");
-            database.addPlayer(new Player(database.getId(), "asd", null));
+            Player player = new Player(database.getId(), "asd", null);
+            database.addPlayer(player);
             updatePlayerList();
+            txtMessage.setText(player.getName() + " added");
         }
         else if(v == btnRemove)
         {
-            curPlayer = (Player) playerList.getSelectedItem();
-            if(curPlayer != null)
-            {
-                database.removePlayer(curPlayer);
-                txtMessage.setText(curPlayer.getName() + " removed");
-                updatePlayerList();
-            }
-            else
-            {
-                txtMessage.setText("null");
-            }
+            remove();
         }
         else if(v == btnUpdate)
         {
-            txtMessage.setText("update");
+            if(curPosition != -1)
+            {
+                Intent intent = new Intent(this, positiongui.class);
+                startActivity(intent);
+            }
+            else
+            {
+                txtMessage.setText("No Player selected");
+            }
         }
     }
 
     public void updatePlayerList() {
-        ArrayAdapter<Player> adapter = new ArrayAdapter<>(
+        adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
                 database.getPlayers()
@@ -108,6 +109,30 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        curPosition = position;
+        database.setCurrentPlayer((Player) playerList.getItemAtPosition(curPosition));
+    }
+
+    public void remove()
+    {
+        try{
+            Player curPlayer = database.getCurrentPlayer();
+            if(curPosition != -1)
+            {
+                database.removePlayer(curPlayer);
+                txtMessage.setText(curPlayer.getName() + " removed");
+                updatePlayerList();
+                curPosition = -1;
+            }
+            else
+            {
+                txtMessage.setText("No Player selected");
+            }
+        }
+        catch(Exception ex)
+        {
+            txtMessage.setText(ex.getMessage());
+        }
 
     }
 }

@@ -17,6 +17,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".playergui_main"/>
+        <activity android:name=".positiongui"/>
     </application>
 
 </manifest>
