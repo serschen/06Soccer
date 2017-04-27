@@ -94,7 +94,7 @@
     <TextView
         android:id="@+id/txtViewName"
         android:layout_width="158dp"
-        android:layout_height="21dp"
+        android:layout_height="wrap_content"
         android:textSize="18sp"
         tools:layout_editor_absoluteX="208dp"
         tools:layout_editor_absoluteY="0dp" />
