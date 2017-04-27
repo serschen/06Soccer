@@ -68,7 +68,7 @@ public class Database {
         tsPlayer.add(new Player(getId(), "OG", null));
     }
 
-    private int getId()
+    public int getId()
     {
         id++;
         return id;
