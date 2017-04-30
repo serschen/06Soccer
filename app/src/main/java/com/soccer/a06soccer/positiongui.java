@@ -51,6 +51,11 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
         player = database.getCurrentPlayer();
         tsPosition = player.getTsPositions();
         txtPlayerName.setText(player.getName());
+
+        if(tsPosition == null)
+        {
+            tsPosition = new TreeSet<>();
+        }
     }
 
     public void getAllViews() {
@@ -64,6 +69,9 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
     public void registrateEventHandlers()
     {
         cbGoalie.setOnCheckedChangeListener(this);
+        cbDefender.setOnCheckedChangeListener(this);
+        cbForward.setOnCheckedChangeListener(this);
+        cbMidfielder.setOnCheckedChangeListener(this);
     }
 
     public void setPositionBoxes()
