@@ -1,8 +1,10 @@
 package com.soccer.a06soccer;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.ActionMode;
 import android.view.Menu;
@@ -12,6 +14,7 @@ import android.widget.AbsListView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,6 +37,10 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     private ListView playerList = null;
     private int curPosition = -1;
     private ArrayAdapter<Player> adapter = null;
+    private AlertDialog dialog = null;
+    private EditText txtNameDialog = null;
+    private Button btnAddPlayerDialog = null;
+    private Button btnCancelAddPlayerDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +52,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             registrateEventHandlers();
             database = Database.getInstance();
             updatePlayerList();
+            createDialog();
         }
         catch(Exception ex)
         {
@@ -69,7 +77,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         btnRemove.setOnClickListener(this);
         btnUpdate.setOnClickListener(this);
         playerList.setOnItemClickListener(this);
-        //playerList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        playerList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
         //playerList.setMultiChoiceModeListener(this);
     }
 
@@ -77,12 +85,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     public void onClick(View v) {
         if(v == btnAdd)
         {
-            Player player = new Player(database.getId(), "asd", null);
-            database.addPlayer(player);
-            updatePlayerList();
-            Toast.makeText(getApplicationContext(),
-                    player.getName() + " added", Toast.LENGTH_LONG)
-                    .show();
+            add();
         }
         else if(v == btnRemove)
         {
@@ -90,17 +93,26 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         }
         else if(v == btnUpdate)
         {
-            if(curPosition != -1)
+            update();
+        }
+        else if(v == btnAddPlayerDialog)
+        {
+            if(txtNameDialog.getText().toString().isEmpty() != true)
             {
-                Intent intent = new Intent(this, positiongui.class);
-                startActivity(intent);
+                addPlayer();
+                dialog.hide();
+                txtNameDialog.setText("");
             }
             else
             {
                 Toast.makeText(getApplicationContext(),
-                        "No Player selected", Toast.LENGTH_LONG)
+                        "Type in a name", Toast.LENGTH_SHORT)
                         .show();
             }
+        }
+        else if(v == btnCancelAddPlayerDialog)
+        {
+            dialog.hide();
         }
     }
 
@@ -127,7 +139,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             {
                 database.removePlayer(curPlayer);
                 Toast.makeText(getApplicationContext(),
-                        curPlayer.getName() + " removed", Toast.LENGTH_LONG)
+                        curPlayer.getName() + " removed", Toast.LENGTH_SHORT)
                         .show();
                 updatePlayerList();
                 curPosition = -1;
@@ -135,7 +147,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             else
             {
                 Toast.makeText(getApplicationContext(),
-                        "No Player selected", Toast.LENGTH_LONG)
+                        "No Player selected", Toast.LENGTH_SHORT)
                         .show();
             }
         }
@@ -146,5 +158,48 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
                     .show();
         }
 
+    }
+
+    public void add()
+    {
+        dialog.show();
+    }
+
+    public void addPlayer()
+    {
+        Player player = new Player(database.getId(), txtNameDialog.getText().toString(), null);
+        database.addPlayer(player);
+        updatePlayerList();
+        Toast.makeText(getApplicationContext(),
+                player.getName() + " added", Toast.LENGTH_SHORT)
+                .show();
+    }
+
+    public void createDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(playergui_main.this);
+        View view = getLayoutInflater().inflate(R.layout.addplayer_dialog, null);
+        txtNameDialog = (EditText) view.findViewById(R.id.txtPlayerNameDialog);
+        btnAddPlayerDialog = (Button) view.findViewById(R.id.btnAddPlayerDialog);
+        btnCancelAddPlayerDialog = (Button) view.findViewById(R.id.btnCancelAddPlayerDialog);
+        btnAddPlayerDialog.setOnClickListener(this);
+        btnCancelAddPlayerDialog.setOnClickListener(this);
+        builder.setView(view);
+        dialog = builder.create();
+    }
+
+    public void update()
+    {
+        if(curPosition != -1)
+        {
+            Intent intent = new Intent(this, positiongui.class);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(),
+                    "No Player selected", Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 }
