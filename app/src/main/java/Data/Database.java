@@ -86,6 +86,8 @@ public class Database {
     {
         tsGame.add(new Game(getGameId(), new Date(), 1, 5));
         tsGame.add(new Game(getGameId(), new Date(), 5, 0));
+        tsGame.add(new Game(getGameId(), new Date(), 5, 8));
+        tsGame.add(new Game(getGameId(), new Date(), 2, 3));
     }
 
     public int getId()

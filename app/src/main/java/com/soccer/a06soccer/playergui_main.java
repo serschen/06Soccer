@@ -113,6 +113,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         else if(v == btnCancelAddPlayerDialog)
         {
             dialog.hide();
+            txtNameDialog.setText("");
         }
     }
 
