@@ -97,7 +97,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         }
         else if(v == btnAddPlayerDialog)
         {
-            if(txtNameDialog.getText().toString().isEmpty() != true)
+            if(!txtNameDialog.getText().toString().isEmpty())
             {
                 addPlayer();
                 dialog.hide();

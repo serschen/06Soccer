@@ -14,6 +14,14 @@ public class Game implements Comparable<Game>{
     private int goalsShotTeam1 = 0;
     private int goalsShotTeam2 = 0;
 
+    public Game(int id, Date date, int goalsShotTeam1, int goalsShotTeam2)
+    {
+        setId(id);
+        setDate(date);
+        setGoalsShotTeam1(goalsShotTeam1);
+        setGoalsShotTeam2(goalsShotTeam2);
+    }
+
     public int getId() {
         return id;
     }
@@ -46,8 +54,12 @@ public class Game implements Comparable<Game>{
         goalsShotTeam2 = goalsShotTeam2;
     }
 
+    public String toString() {
+        return id + " " + date.toString();
+    }
+
     @Override
-    public int compareTo(@NonNull Game o) {
-        return this.getDate().compareTo(o.getDate());
+    public int compareTo(Game o) {
+        return this.getId() - o.getId();
     }
 }

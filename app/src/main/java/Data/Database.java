@@ -1,6 +1,7 @@
 package Data;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.TreeSet;
 
 /**
@@ -20,6 +21,7 @@ public class Database {
         tsPlayer = new TreeSet<>();
         tsGame = new TreeSet<>();
         defaultPlayers();
+        defaultGames();
     }
 
     public static Database getInstance()
@@ -67,6 +69,12 @@ public class Database {
         tsPlayer.add(new Player(getId(), "Peter", null));
         tsPlayer.add(new Player(getId(), "Hans", null));
         tsPlayer.add(new Player(getId(), "OG", null));
+    }
+
+    public void defaultGames()
+    {
+        tsGame.add(new Game(1, new Date(), 1, 5));
+        tsGame.add(new Game(2, new Date(), 5, 0));
     }
 
     public int getId()

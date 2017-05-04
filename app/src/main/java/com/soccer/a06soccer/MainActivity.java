@@ -57,7 +57,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if(v == btnGames)
         {
-            messageLine.setText("Games");
+            Intent intent2 = new Intent(this, gamegui_main.class);
+            startActivity(intent2);
         }
         else if(v == btnStats)
         {
