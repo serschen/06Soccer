@@ -11,18 +11,18 @@
 
     <ListView
         android:id="@+id/listViewPlayer"
-        android:layout_width="wrap_content"
-        android:layout_height="500dp"
+        android:layout_width="392dp"
+        android:layout_height="320dp"
         android:visibility="visible"
-        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteX="-8dp"
         tools:layout_editor_absoluteY="0dp" />
 
     <Button
-        android:id="@+id/bttnShow"
-        android:layout_width="557dp"
-        android:layout_height="56dp"
+        android:id="@+id/btnShow"
+        android:layout_width="352dp"
+        android:layout_height="75dp"
         android:text="SHOW"
-        android:visibility="visible"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="520dp" />
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="346dp" />
+
 </android.support.constraint.ConstraintLayout>
