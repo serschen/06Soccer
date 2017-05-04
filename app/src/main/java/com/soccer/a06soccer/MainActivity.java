@@ -57,12 +57,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
         else if(v == btnGames)
         {
-            Intent intent2 = new Intent(this, gamegui_main.class);
-            startActivity(intent2);
+            Intent intent = new Intent(this, gamegui_main.class);
+            startActivity(intent);
         }
         else if(v == btnStats)
         {
-            messageLine.setText("Stats");
+            Intent intent = new Intent(this, statsgui_main.class);
+            startActivity(intent);
         }
     }
 }

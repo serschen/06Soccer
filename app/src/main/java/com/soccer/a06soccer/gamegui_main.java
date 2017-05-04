@@ -79,7 +79,7 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+        database.setCurrentGame((Game) parent.getItemAtPosition(position));
     }
 
     @Override
@@ -90,7 +90,8 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
         }
         else if(v == btnRemove)
         {
-
+            database.removeGame(database.getCurrentGame());
+            getData();
         }
         else if(v == btnUpdate)
         {

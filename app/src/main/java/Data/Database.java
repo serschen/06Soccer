@@ -13,7 +13,18 @@ public class Database {
     private TreeSet<Player> tsPlayer = null;
     private TreeSet<Game> tsGame = null;
     private int id = 0;
+    private int gameId = 0;
     private Player currentPlayer = null;
+    private Game currentGame = null;
+
+    public int getGameId() {
+        gameId++;
+        return gameId;
+    }
+
+    public void setGameId(int gameId) {
+        this.gameId = gameId;
+    }
 
     public Database()
     {
@@ -73,8 +84,8 @@ public class Database {
 
     public void defaultGames()
     {
-        tsGame.add(new Game(1, new Date(), 1, 5));
-        tsGame.add(new Game(2, new Date(), 5, 0));
+        tsGame.add(new Game(getGameId(), new Date(), 1, 5));
+        tsGame.add(new Game(getGameId(), new Date(), 5, 0));
     }
 
     public int getId()
@@ -89,5 +100,13 @@ public class Database {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+    }
+
+    public Game getCurrentGame() {
+        return currentGame;
+    }
+
+    public void setCurrentGame(Game currentGame) {
+        this.currentGame = currentGame;
     }
 }
