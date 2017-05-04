@@ -10,7 +10,7 @@ public class Statistics implements Comparable<Statistics>{
     private Player player = null;
     private Game game = null;
     private char team = '0';
-    private int goulPenalty = 0;
+    private int goalPenalty = 0;
     private int goalHead = 0;
     private int goalHeadSnow = 0;
     private int goalOwn = 0;
@@ -46,11 +46,11 @@ public class Statistics implements Comparable<Statistics>{
     }
 
     public int getGoulPenalty() {
-        return goulPenalty;
+        return goalPenalty;
     }
 
     public void setGoulPenalty(int goulPenalty) {
-        this.goulPenalty = goulPenalty;
+        this.goalPenalty = goulPenalty;
     }
 
     public int getGoalHead() {
