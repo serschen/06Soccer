@@ -20,6 +20,7 @@
         <activity android:name=".positiongui"/>
         <activity android:name=".gamegui_main"/>
         <activity android:name=".statsgui_main"/>
+        <activity android:name=".playerstats_overall" />
     </application>
 
 </manifest>
