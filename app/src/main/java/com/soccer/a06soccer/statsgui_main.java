@@ -6,6 +6,7 @@ import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
     private ListView lvPlayer = null;
     private Database db = null;
     private int curPos = -1;
-
+    private ArrayAdapter<Player>adapter = null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,7 +33,7 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
             getAllViews();
             registrateEventHandlers();
             db = Database.getInstance();
-
+            loadPlayer();
         }
         catch(Exception ex)
         {
@@ -64,5 +65,14 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
     {
         btnShow.setOnClickListener(this);
         lvPlayer.setOnItemClickListener(this);
+    }
+
+    public void loadPlayer() {
+        adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                db.getPlayers()
+        );
+        lvPlayer.setAdapter(adapter);
     }
 }
