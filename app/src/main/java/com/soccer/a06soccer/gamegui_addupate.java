@@ -1,6 +1,10 @@
 package com.soccer.a06soccer;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
+import android.icu.text.DateFormat;
+import android.icu.text.SimpleDateFormat;
+import android.icu.util.Calendar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,14 +19,19 @@ import android.widget.Toast;
 import Data.Database;
 import Data.Game;
 
-public class gamegui_addupate extends android.support.v7.app.AppCompatActivity implements DatePickerDialog.OnDateSetListener, View.OnClickListener {
+public class gamegui_addupate extends AppCompatActivity implements View.OnClickListener {
+    static final int DATE_DIALOG_ID = 0;
     private Button bttnDate = null;
     private Button bttnTeam1 = null;
     private Button bttnTeam2 = null;
     private Button bttnRandom = null;
 
     private Database database = null;
-    //DatePickerDialog datePickerDialog = new DatePickerDialog(getBaseContext(), gamegui_addupate.this, 2017, 5, 10);
+    private DatePickerDialog.OnDateSetListener mDateSetListener = null;
+
+    int mYear = 0;
+    int mMonth = 0;
+    int mDay = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,30 +63,40 @@ public class gamegui_addupate extends android.support.v7.app.AppCompatActivity i
         bttnTeam1.setOnClickListener(this);
         bttnTeam2.setOnClickListener(this);
         bttnRandom.setOnClickListener(this);
+        mDateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                mYear = year;
+                mMonth = month;
+                mDay = dayOfMonth;
+                Calendar cal = Calendar.getInstance();
+                cal.set(year, month, dayOfMonth);
+                DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+            }
+        };
     }
 
     @Override
     public void onClick(View v) {
-        if (v == bttnDate)
-        {
-            //datePickerDialog.show();
-        }
-        else if (v == bttnTeam1)
-        {
+        if (v == bttnDate) {
+            showDialog(DATE_DIALOG_ID);
+        } else if (v == bttnTeam1) {
 
-        }
-        else if (v == bttnTeam2)
-        {
+        } else if (v == bttnTeam2) {
 
-        }
-        else if (v == bttnRandom)
-        {
+        } else if (v == bttnRandom) {
 
         }
     }
 
     @Override
-    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-
+    protected Dialog onCreateDialog(int id) {
+        switch (id) {
+            case DATE_DIALOG_ID:
+                return new DatePickerDialog(this,
+                        mDateSetListener,
+                        mYear, mMonth, mDay);
+        }
+        return null;
     }
 }
