@@ -22,8 +22,7 @@ public class gamegui_addupate extends android.support.v7.app.AppCompatActivity i
     private Button bttnRandom = null;
 
     private Database database = null;
-    DatePickerDialog datePickerDialog = new DatePickerDialog(
-            getApplicationContext(), gamegui_addupate.this, 2017, 5, 10);
+    //DatePickerDialog datePickerDialog = new DatePickerDialog(getBaseContext(), gamegui_addupate.this, 2017, 5, 10);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,7 +60,7 @@ public class gamegui_addupate extends android.support.v7.app.AppCompatActivity i
     public void onClick(View v) {
         if (v == bttnDate)
         {
-            datePickerDialog.show();
+            //datePickerDialog.show();
         }
         else if (v == bttnTeam1)
         {
