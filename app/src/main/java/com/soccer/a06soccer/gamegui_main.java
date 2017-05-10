@@ -1,5 +1,6 @@
 package com.soccer.a06soccer;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.ButtonBarLayout;
@@ -21,7 +22,7 @@ import Data.Game;
  * Created by anton on 03.05.2017.
  */
 
-public class gamegui_main extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener{
+public class gamegui_main extends AppCompatActivity implements AdapterView.OnItemClickListener, View.OnClickListener {
     private Database database = null;
     private ListView lvGame = null;
     private Button btnAdd = null;
@@ -35,22 +36,19 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gamegui_main);
 
-        try{
+        try {
             getAllViews();
             registrateEventHandlers();
             database = Database.getInstance();
             getData();
-        }
-        catch(Exception ex)
-        {
+        } catch (Exception ex) {
             Toast.makeText(getApplicationContext(),
                     ex.getMessage(), Toast.LENGTH_SHORT)
                     .show();
         }
     }
 
-    public void getAllViews()
-    {
+    public void getAllViews() {
         lvGame = (ListView) this.findViewById(R.id.lvGames);
         btnAdd = (Button) this.findViewById(R.id.bttnAdd);
         btnRemove = (Button) this.findViewById(R.id.bttnRemove);
@@ -58,8 +56,7 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
         btnShow = (Button) this.findViewById(R.id.bttnShow);
     }
 
-    public void registrateEventHandlers()
-    {
+    public void registrateEventHandlers() {
         lvGame.setOnItemClickListener(this);
         btnAdd.setOnClickListener(this);
         btnRemove.setOnClickListener(this);
@@ -67,8 +64,7 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
         btnShow.setOnClickListener(this);
     }
 
-    public void getData()
-    {
+    public void getData() {
         adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -84,21 +80,15 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onClick(View v) {
-        if(v == btnAdd)
-        {
-
-        }
-        else if(v == btnRemove)
-        {
+        if (v == btnAdd) {
+            Intent intent = new Intent(this, gamegui_addupate.class);
+            startActivity(intent);
+        } else if (v == btnRemove) {
             database.removeGame(database.getCurrentGame());
             getData();
-        }
-        else if(v == btnUpdate)
-        {
+        } else if (v == btnUpdate) {
 
-        }
-        else if(v == btnShow)
-        {
+        } else if (v == btnShow) {
 
         }
     }
