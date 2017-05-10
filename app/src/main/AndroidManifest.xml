@@ -21,6 +21,7 @@
         <activity android:name=".gamegui_main"/>
         <activity android:name=".statsgui_main"/>
         <activity android:name=".playerstats_overall" />
+        <activity android:name=".teampicker_gui" />
     </application>
 
 </manifest>
