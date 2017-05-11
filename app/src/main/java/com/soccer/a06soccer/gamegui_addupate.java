@@ -15,6 +15,7 @@ import android.widget.DatePicker;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.content.Intent;
 
 import Data.Database;
 import Data.Game;
@@ -25,6 +26,7 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
     private Button bttnTeam1 = null;
     private Button bttnTeam2 = null;
     private Button bttnRandom = null;
+    private String teamSelected = null;
 
     private Database database = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener = null;
@@ -81,9 +83,13 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
         if (v == bttnDate) {
             showDialog(DATE_DIALOG_ID);
         } else if (v == bttnTeam1) {
-
+            Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
+            intent.putExtra("EXTRA_SESSION_ID", teamSelected);
+            startActivity(intent);
         } else if (v == bttnTeam2) {
-
+            Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
+            intent.putExtra("EXTRA_SESSION_ID", teamSelected);
+            startActivity(intent);
         } else if (v == bttnRandom) {
 
         }
