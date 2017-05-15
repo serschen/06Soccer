@@ -81,13 +81,14 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onClick(View v) {
         if (v == btnAdd) {
-            Intent intent = new Intent(this, gamegui_addupate.class);
-            startActivity(intent);
+            database.addGame(new Game());
+            getData();
         } else if (v == btnRemove) {
             database.removeGame(database.getCurrentGame());
             getData();
         } else if (v == btnUpdate) {
-
+            Intent intent = new Intent(this, gamegui_addupate.class);
+            startActivity(intent);
         } else if (v == btnShow) {
 
         }

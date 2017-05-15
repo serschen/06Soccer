@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -27,7 +28,10 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
     private Button bttnTeam1 = null;
     private Button bttnTeam2 = null;
     private Button bttnRandom = null;
-    private String teamSelected = null;
+    private TextView tvDate = null;
+    private EditText etTeam1 = null;
+    private EditText etTeam2 = null;
+    private Game currentGame = null;
 
     private Database database = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener = null;
@@ -45,6 +49,10 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
             getAllViews();
             registrateEventHandlers();
             database = Database.getInstance();
+            currentGame = database.getCurrentGame();
+            tvDate.setText(currentGame.getDate().toString());
+            etTeam1.setText("" + currentGame.getGoalsShotTeam1());
+            etTeam2.setText("" + currentGame.getGoalsShotTeam2());
         }
         catch(Exception ex)
         {
@@ -58,6 +66,9 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
         bttnTeam1 = (Button) this.findViewById(R.id.bttnTeam1);
         bttnTeam2 = (Button) this.findViewById(R.id.bttnTeam2);
         bttnRandom = (Button) this.findViewById(R.id.bttnRandom);
+        tvDate = (TextView) this.findViewById(R.id.tvDate);
+        etTeam1 = (EditText) this.findViewById(R.id.etTeam1);
+        etTeam2 = (EditText) this.findViewById(R.id.etTeam2);
     }
 
     public void registrateEventHandlers()
@@ -85,11 +96,11 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
             showDialog(DATE_DIALOG_ID);
         } else if (v == bttnTeam1) {
             Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
-            intent.putExtra("EXTRA_SESSION_ID", teamSelected);
+            intent.putExtra("TEAM SELECTED", "Players of team 1");
             startActivity(intent);
         } else if (v == bttnTeam2) {
             Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
-            intent.putExtra("EXTRA_SESSION_ID", teamSelected);
+            intent.putExtra("TEAM SELECTED", "Players of team 2");
             startActivity(intent);
         } else if (v == bttnRandom) {
 
