@@ -17,6 +17,7 @@ public class Database {
     private int gameId = 0;
     private Player currentPlayer = null;
     private Game currentGame = null;
+    private Userdata loggedInUser = null;
 
     public int getGameId() {
         gameId++;
@@ -104,6 +105,19 @@ public class Database {
         return id;
     }
 
+    public TreeSet<Userdata> getTsUserdata() {
+        return tsUserdata;
+    }
+
+    public ArrayList<Userdata> getUserdata()
+    {
+        return new ArrayList<>(tsUserdata);
+    }
+
+    public void setTsUserdata(TreeSet<Userdata> tsUserdata) {
+        this.tsUserdata = tsUserdata;
+    }
+
     public Player getCurrentPlayer() {
         return currentPlayer;
     }
@@ -118,5 +132,21 @@ public class Database {
 
     public void setCurrentGame(Game currentGame) {
         this.currentGame = currentGame;
+    }
+
+    public Boolean checkUserData(String username, String password)
+    {
+        Boolean ret = false;
+
+        for(Userdata user:tsUserdata)
+        {
+            if(user.getUsername().equals(username) && user.getPassword().equals(password))
+            {
+                loggedInUser = user;
+                ret = true;
+            }
+        }
+
+        return ret;
     }
 }

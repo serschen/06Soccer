@@ -29,9 +29,9 @@ public class login  extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.login);
 
         try{
-            database = Database.getInstance();
             getAllViews();
             registrateEventHandlers();
+            database = Database.getInstance();
         }
         catch(Exception ex)
         {
@@ -44,7 +44,7 @@ public class login  extends AppCompatActivity implements View.OnClickListener {
     public void getAllViews()
     {
         loginButton = (Button) this.findViewById(R.id.BtnLogin);
-        txtUsername = (TextView) this.findViewById(R.id.txtName);
+        txtUsername = (TextView) this.findViewById(R.id.txtLoginName);
         txtPassword = (TextView) this.findViewById(R.id.txtLoginPassword);
     }
 
@@ -55,10 +55,23 @@ public class login  extends AppCompatActivity implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        if(v == loginButton)
+        try {
+            if (v == loginButton) {
+                if (database.checkUserData(txtUsername.getText().toString(), txtPassword.getText().toString())) {
+                    Intent intent = new Intent(this, MainActivity.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Wrong Password", Toast.LENGTH_SHORT)
+                            .show();
+                }
+            }
+        }
+        catch(Exception ex)
         {
-            Intent intent = new Intent(this, MainActivity.class);
-            startActivity(intent);
+            Toast.makeText(getApplicationContext(),
+                    ex.getMessage(), Toast.LENGTH_LONG)
+                    .show();
         }
     }
 }
