@@ -12,6 +12,7 @@ public class Database {
     private static Database reference = null;
     private TreeSet<Player> tsPlayer = null;
     private TreeSet<Game> tsGame = null;
+    private TreeSet<Userdata> tsUserdata = null;
     private int id = 0;
     private int gameId = 0;
     private Player currentPlayer = null;
@@ -31,8 +32,10 @@ public class Database {
         super();
         tsPlayer = new TreeSet<>();
         tsGame = new TreeSet<>();
+        tsUserdata = new TreeSet<>();
         defaultPlayers();
         defaultGames();
+        defaultUsers();
     }
 
     public static Database getInstance()
@@ -88,6 +91,11 @@ public class Database {
         tsGame.add(new Game(getGameId(), new Date(), 5, 0));
         tsGame.add(new Game(getGameId(), new Date(), 5, 8));
         tsGame.add(new Game(getGameId(), new Date(), 2, 3));
+    }
+
+    public void defaultUsers()
+    {
+        tsUserdata.add(new Userdata("test", "test", "a"));
     }
 
     public int getId()
