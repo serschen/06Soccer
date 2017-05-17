@@ -1,5 +1,7 @@
 package Data;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -65,6 +67,22 @@ public class Game implements Comparable<Game>{
 
     public void setGoalsShotTeam2(int goalsShotTeam2) {
         this.goalsShotTeam2 = goalsShotTeam2;
+    }
+
+    public ArrayList<Player> getTsTeamOnePlayer() {
+        return new ArrayList<>(tsTeamOnePlayer);
+    }
+
+    public void setTsTeamOnePlayer(TreeSet<Player> tsTeamOnePlayer) {
+        this.tsTeamOnePlayer = tsTeamOnePlayer;
+    }
+
+    public ArrayList<Player> getTsTeamTwoPlayer() {
+        return new ArrayList<>(tsTeamTwoPlayer);
+    }
+
+    public void setTsTeamTwoPlayer(TreeSet<Player> tsTeamTwoPlayer) {
+        this.tsTeamTwoPlayer = tsTeamTwoPlayer;
     }
 
     public void addPlayerTeamOne(Player p) {

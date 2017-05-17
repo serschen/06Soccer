@@ -27,16 +27,15 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
     private Button bttnRemove = null;
     private ListView lvAllPlayer = null;
 
+    Player movePlayer = null;
     String teamSelected = null;
-    private ArrayList<Player> alPlayerAll = null;
-    private ArrayList<Player> alPlayerSel = new ArrayList<>();
-
-    private ArrayAdapter<Player> adapterAll = null;
-    private ArrayAdapter<Player> adapterSel = null;
-
-    private Database db = null;
     private int curPositionAll = -1;
     private int curPositionSel = -1;
+    private Database db = null;
+    private ArrayList<Player> alPlayerAll = null;
+    private ArrayList<Player> alPlayerSel = new ArrayList<>();
+    private ArrayAdapter<Player> adapterAll = null;
+    private ArrayAdapter<Player> adapterSel = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +46,19 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
             getAllViews();
             registrateEventHandlers();
             db = Database.getInstance();
-            alPlayerAll = (ArrayList<Player>) db.getPlayers().clone();
+            alPlayerAll = db.getPlayers();
             updateAllPlayerList();
             teamSelected = getIntent().getStringExtra("TEAM SELECTED");
             tvTeamName.setText(teamSelected);
+
+            if (teamSelected == "Team 1") {
+                alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
+            }
+            else {
+                alPlayerSel = db.getCurrentGame().getTsTeamTwoPlayer();
+            }
+
+            updateSelPlayerList();
         }
         catch(Exception ex)
         {
@@ -58,50 +66,57 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
         }
     }
 
+    public void getAllViews()
+    {
+        lvSelectedPlayer = (ListView) this.findViewById(R.id.lvSelectedPlayer);
+        lvAllPlayer = (ListView) this.findViewById(R.id.lvAllPlayer);
+        bttnAdd = (Button) this.findViewById(R.id.bttnAdd);
+        bttnRemove = (Button) this.findViewById(R.id.bttnRemove);
+        tvTeamName = (TextView) findViewById(R.id.tvTeamName);
+    }
+
+    public void registrateEventHandlers()
+    {
+        lvSelectedPlayer.setOnItemClickListener(this);
+        lvSelectedPlayer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        lvAllPlayer.setOnItemClickListener(this);
+        lvAllPlayer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        bttnAdd.setOnClickListener(this);
+        bttnRemove.setOnClickListener(this);
+    }
+
     @Override
     public void onClick(View v) {
-        if (v == bttnAdd) {
-            try {
-                Player movePlayer = null;
+        try {
+            if (v == bttnAdd) {
                 movePlayer = alPlayerAll.remove(curPositionAll);
                 updateAllPlayerList();
-                Toast.makeText(this, movePlayer.toString(), Toast.LENGTH_SHORT).show();
-                alPlayerSel.add(movePlayer);
 
                 if (teamSelected == "Team 1") {
                     db.addPlayerTeamOne(movePlayer);
-                }
-                else {
+                } else {
                     db.addPlayerTeamTwo(movePlayer);
                 }
 
+                alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
                 updateSelPlayerList();
-            }
-            catch (Exception ex)
-            {
-                Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
-            }
-        } else if (v == bttnRemove) {
-            try {
-                Player movePlayer = null;
+            } else if (v == bttnRemove) {
                 movePlayer = alPlayerSel.remove(curPositionSel);
                 updateAllPlayerList();
-                Toast.makeText(this, movePlayer.toString(), Toast.LENGTH_SHORT).show();
-                alPlayerAll.add(movePlayer);
 
                 if (teamSelected == "Team 1") {
                     db.removePlayerTeamOne(movePlayer);
-                }
-                else {
+                } else {
                     db.removePlayerTeamTwo(movePlayer);
                 }
 
+                alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
                 updateSelPlayerList();
             }
-            catch (Exception ex)
-            {
-                Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
-            }
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(getApplicationContext(), ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -135,24 +150,5 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
         );
 
         lvSelectedPlayer.setAdapter(adapterSel);
-    }
-
-    public void getAllViews()
-    {
-        lvSelectedPlayer = (ListView) this.findViewById(R.id.lvSelectedPlayer);
-        lvAllPlayer = (ListView) this.findViewById(R.id.lvAllPlayer);
-        bttnAdd = (Button) this.findViewById(R.id.bttnAdd);
-        bttnRemove = (Button) this.findViewById(R.id.bttnRemove);
-        tvTeamName = (TextView) findViewById(R.id.tvTeamName);
-    }
-
-    public void registrateEventHandlers()
-    {
-        lvSelectedPlayer.setOnItemClickListener(this);
-        lvSelectedPlayer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        lvAllPlayer.setOnItemClickListener(this);
-        lvAllPlayer.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
-        bttnAdd.setOnClickListener(this);
-        bttnRemove.setOnClickListener(this);
     }
 }
