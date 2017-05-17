@@ -109,6 +109,14 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
     }
 
     @Override
+    public void onBackPressed () {
+        currentGame.setGoalsShotTeam1(Integer.parseInt(etTeam1.getText().toString()));
+        currentGame.setGoalsShotTeam2(Integer.parseInt(etTeam2.getText().toString()));
+
+        super.onBackPressed();
+    }
+
+    @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
             case DATE_DIALOG_ID:
