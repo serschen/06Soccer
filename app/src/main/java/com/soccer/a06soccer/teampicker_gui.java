@@ -23,9 +23,9 @@ import Data.Player;
 public class teampicker_gui extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
     private TextView tvTeamName = null;
     private ListView lvSelectedPlayer = null;
-    private ListView lvAllPlayer = null;
     private Button bttnAdd = null;
     private Button bttnRemove = null;
+    private ListView lvAllPlayer = null;
 
     String teamSelected = null;
     private ArrayList<Player> alPlayerAll = null;
