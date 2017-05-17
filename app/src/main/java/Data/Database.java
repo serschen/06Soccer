@@ -1,5 +1,7 @@
 package Data;
 
+import android.widget.Toast;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
@@ -16,6 +18,7 @@ public class Database {
     private int gameId = 0;
     private Player currentPlayer = null;
     private Game currentGame = null;
+    private TreeSet<Participation> tsParticipation = null;
 
     public int getGameId() {
         gameId++;
@@ -111,4 +114,34 @@ public class Database {
     public void setCurrentGame(Game currentGame) {
         this.currentGame = currentGame;
     }
+
+    public void addPlayerToTeam(Player Player,Game game, int numberTeam) throws Exception {
+        if(numberTeam == 1)
+        {
+            Participation newParticipation = new Participation(tsParticipation.size() + 1,game.getId(),Player.getID(),Player.getPositionString(),"teamOne");
+            tsParticipation.add(newParticipation);
+        }
+
+        else if(numberTeam == 2)
+        {
+            Participation newParticipation = new Participation(tsParticipation.size() + 1,game.getId(),Player.getID(),Player.getPositionString(),"teamTwo");
+            tsParticipation.add(newParticipation);
+        }
+        else
+        {
+            throw new Exception();
+        }
+
+    }
+
+    public void removePlayerFromTeam(Player Player , Game game) throws Exception {
+            //Problem mit schleife ts durchgehen und nach playerid und gameid abfragen weil sollte unique sein
+            for( Participation p : tsParticipation) {
+                if (p.getIdPlayer() == Player.getID() && p.getIdGame() == game.getId()) {
+                    tsParticipation.remove(p);
+                }
+            }
+    }
+
+
 }

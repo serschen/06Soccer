@@ -53,6 +53,16 @@ public class Player implements Comparable<Player> {
         this.tsPosition = tsPosition;
     }
 
+    public String getPositionString() {
+        String positions = null;
+
+        for (Position pos : tsPosition)
+        {
+            positions = positions + "," + pos.toString();
+        }
+        return positions;
+    }
+
     public ArrayList<Position> getPositions() {
         return new ArrayList<>(tsPosition);
     }
