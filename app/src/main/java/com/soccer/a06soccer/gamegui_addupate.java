@@ -22,6 +22,7 @@ import java.util.Calendar;
 import Data.Database;
 import Data.Game;
 
+@SuppressWarnings("deprecation")
 public class gamegui_addupate extends AppCompatActivity implements View.OnClickListener {
     static final int DATE_DIALOG_ID = 0;
     private Button bttnDate = null;
