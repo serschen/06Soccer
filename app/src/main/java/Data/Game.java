@@ -85,14 +85,7 @@ public class Game implements Comparable<Game>{
 
     @Override
     public String toString() {
-        return "Game{" +
-                "id=" + id +
-                ", date=" + date +
-                ", goalsShotTeam1=" + goalsShotTeam1 +
-                ", goalsShotTeam2=" + goalsShotTeam2 +
-                ", tsTeamOnePlayer=" + tsTeamOnePlayer +
-                ", tsTeamTwoPlayer=" + tsTeamTwoPlayer +
-                '}';
+        return id + " " + date;
     }
 
     @Override
