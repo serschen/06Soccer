@@ -49,6 +49,38 @@ public class Database {
         return reference;
     }
 
+    public void addPlayerTeamOne(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamOnePlayer();
+
+        helpTS.add(newPlayer);
+
+        currentGame.setTsTeamOnePlayer(helpTS);
+    }
+
+    public void addPlayerTeamTwo(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamTwoPlayer();
+
+        helpTS.add(newPlayer);
+
+        currentGame.setTsTeamTwoPlayer(helpTS);
+    }
+
+    public void removePlayerTeamOne(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamOnePlayer();
+
+        helpTS.remove(newPlayer);
+
+        currentGame.setTsTeamOnePlayer(helpTS);
+    }
+
+    public void removePlayerTeamTwo(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamTwoPlayer();
+
+        helpTS.remove(newPlayer);
+
+        currentGame.setTsTeamTwoPlayer(helpTS);
+    }
+
     public void addPlayer(Player p)
     {
         tsPlayer.add(p);
@@ -147,6 +179,7 @@ public class Database {
             }
         }
 
-        return ret;
+        //return ret;
+        return true;
     }
 }

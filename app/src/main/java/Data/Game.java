@@ -40,6 +40,8 @@ public class Game implements Comparable<Game>{
         setDate(new Date());
         setGoalsShotTeam1(0);
         setGoalsShotTeam2(0);
+        tsTeamOnePlayer = new TreeSet<>();
+        tsTeamTwoPlayer = new TreeSet<>();
     }
 
     public Game(int id, Date date, int goalsShotTeam1, int goalsShotTeam2) {
@@ -80,7 +82,7 @@ public class Game implements Comparable<Game>{
     }
 
     public void setGoalsShotTeam2(int goalsShotTeam2) {
-        goalsShotTeam2 = goalsShotTeam2;
+        this.goalsShotTeam2 = goalsShotTeam2;
     }
 
     public String toString() {

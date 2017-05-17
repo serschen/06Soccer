@@ -1,6 +1,5 @@
 package com.soccer.a06soccer;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -12,13 +11,9 @@ import android.widget.Toast;
 import android.widget.ListView;
 import android.widget.Button;
 
-import java.lang.reflect.Array;
-import java.util.List;
-import java.util.TreeSet;
 import java.util.ArrayList;
 
 import Data.Database;
-import Data.Game;
 import Data.Player;
 
 /**
@@ -26,11 +21,12 @@ import Data.Player;
  */
 
 public class teampicker_gui extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+    private TextView tvTeamName = null;
     private ListView lvSelectedPlayer = null;
     private ListView lvAllPlayer = null;
     private Button bttnAdd = null;
     private Button bttnRemove = null;
-    private TextView tvTeamName = null;
+
     String teamSelected = null;
     private ArrayList<Player> alPlayerAll = null;
     private ArrayList<Player> alPlayerSel = new ArrayList<>();
@@ -71,6 +67,14 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
                 updateAllPlayerList();
                 Toast.makeText(this, movePlayer.toString(), Toast.LENGTH_SHORT).show();
                 alPlayerSel.add(movePlayer);
+
+                if (teamSelected == "Team 1") {
+                    db.addPlayerTeamOne(movePlayer);
+                }
+                else {
+                    db.addPlayerTeamTwo(movePlayer);
+                }
+
                 updateSelPlayerList();
             }
             catch (Exception ex)
@@ -84,6 +88,14 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
                 updateAllPlayerList();
                 Toast.makeText(this, movePlayer.toString(), Toast.LENGTH_SHORT).show();
                 alPlayerAll.add(movePlayer);
+
+                if (teamSelected == "Team 1") {
+                    db.removePlayerTeamOne(movePlayer);
+                }
+                else {
+                    db.removePlayerTeamTwo(movePlayer);
+                }
+
                 updateSelPlayerList();
             }
             catch (Exception ex)
