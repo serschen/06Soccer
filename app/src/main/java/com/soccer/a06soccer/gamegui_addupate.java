@@ -38,10 +38,12 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
     private Database database = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener = null;
 
+    private Calendar calendar = Calendar.getInstance();
 
-    int mYear = 117;
-    int mMonth = 0;
-    int mDay = 0;
+    int mYear = calendar.get(Calendar.YEAR) - 1900;
+    int mMonth = calendar.get(Calendar.MONTH);
+    int mDay = calendar.get(Calendar.DAY_OF_MONTH);
+
 
 
     @Override
