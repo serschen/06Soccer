@@ -12,10 +12,12 @@ public class Database {
     private static Database reference = null;
     private TreeSet<Player> tsPlayer = null;
     private TreeSet<Game> tsGame = null;
+    private TreeSet<Userdata> tsUserdata = null;
     private int id = 0;
     private int gameId = 0;
     private Player currentPlayer = null;
     private Game currentGame = null;
+    private Userdata loggedInUser = null;
 
     public int getGameId() {
         gameId++;
@@ -31,8 +33,10 @@ public class Database {
         super();
         tsPlayer = new TreeSet<>();
         tsGame = new TreeSet<>();
+        tsUserdata = new TreeSet<>();
         defaultPlayers();
         defaultGames();
+        defaultUsers();
     }
 
     public static Database getInstance()
@@ -43,6 +47,38 @@ public class Database {
         }
 
         return reference;
+    }
+
+    public void addPlayerTeamOne(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamOnePlayer();
+
+        helpTS.add(newPlayer);
+
+        currentGame.setTsTeamOnePlayer(helpTS);
+    }
+
+    public void addPlayerTeamTwo(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamTwoPlayer();
+
+        helpTS.add(newPlayer);
+
+        currentGame.setTsTeamTwoPlayer(helpTS);
+    }
+
+    public void removePlayerTeamOne(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamOnePlayer();
+
+        helpTS.remove(newPlayer);
+
+        currentGame.setTsTeamOnePlayer(helpTS);
+    }
+
+    public void removePlayerTeamTwo(Player newPlayer) {
+        TreeSet<Player> helpTS = currentGame.getTsTeamTwoPlayer();
+
+        helpTS.remove(newPlayer);
+
+        currentGame.setTsTeamTwoPlayer(helpTS);
     }
 
     public void addPlayer(Player p)
@@ -90,10 +126,28 @@ public class Database {
         tsGame.add(new Game(getGameId(), new Date(), 2, 3));
     }
 
+    public void defaultUsers()
+    {
+        tsUserdata.add(new Userdata("test", "test", "a"));
+    }
+
     public int getId()
     {
         id++;
         return id;
+    }
+
+    public TreeSet<Userdata> getTsUserdata() {
+        return tsUserdata;
+    }
+
+    public ArrayList<Userdata> getUserdata()
+    {
+        return new ArrayList<>(tsUserdata);
+    }
+
+    public void setTsUserdata(TreeSet<Userdata> tsUserdata) {
+        this.tsUserdata = tsUserdata;
     }
 
     public Player getCurrentPlayer() {
@@ -110,5 +164,22 @@ public class Database {
 
     public void setCurrentGame(Game currentGame) {
         this.currentGame = currentGame;
+    }
+
+    public Boolean checkUserData(String username, String password)
+    {
+        Boolean ret = false;
+
+        for(Userdata user:tsUserdata)
+        {
+            if(user.getUsername().equals(username) && user.getPassword().equals(password))
+            {
+                loggedInUser = user;
+                ret = true;
+            }
+        }
+
+        //return ret;
+        return true;
     }
 }

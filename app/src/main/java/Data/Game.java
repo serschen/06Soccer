@@ -1,7 +1,7 @@
 package Data;
 
-import android.support.annotation.NonNull;
-
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
 
@@ -16,22 +16,6 @@ public class Game implements Comparable<Game>{
     private int goalsShotTeam2 = 0;
     private TreeSet<Player> tsTeamOnePlayer = null;
     private TreeSet<Player> tsTeamTwoPlayer = null;
-
-    public TreeSet<Player> getTsTeamOnePlayer() {
-        return tsTeamOnePlayer;
-    }
-
-    public void setTsTeamOnePlayer(TreeSet<Player> tsTeamOnePlayer) {
-        this.tsTeamOnePlayer = tsTeamOnePlayer;
-    }
-
-    public TreeSet<Player> getTsTeamTwoPlayer() {
-        return tsTeamTwoPlayer;
-    }
-
-    public void setTsTeamTwoPlayer(TreeSet<Player> tsTeamTwoPlayer) {
-        this.tsTeamTwoPlayer = tsTeamTwoPlayer;
-    }
 
     public Game()
     {
@@ -85,8 +69,41 @@ public class Game implements Comparable<Game>{
         this.goalsShotTeam2 = goalsShotTeam2;
     }
 
+    public ArrayList<Player> getTsTeamOnePlayer() {
+        return new ArrayList<>(tsTeamOnePlayer);
+    }
+
+    public void setTsTeamOnePlayer(TreeSet<Player> tsTeamOnePlayer) {
+        this.tsTeamOnePlayer = tsTeamOnePlayer;
+    }
+
+    public ArrayList<Player> getTsTeamTwoPlayer() {
+        return new ArrayList<>(tsTeamTwoPlayer);
+    }
+
+    public void setTsTeamTwoPlayer(TreeSet<Player> tsTeamTwoPlayer) {
+        this.tsTeamTwoPlayer = tsTeamTwoPlayer;
+    }
+
+    public void addPlayerTeamOne(Player p) {
+        tsTeamOnePlayer.add(p);
+    }
+
+    public void addPlayerTeamTwo(Player p) {
+        tsTeamTwoPlayer.add(p);
+    }
+
+    public void removePlayerTeamOne(Player p) {
+        tsTeamOnePlayer.remove(p);
+    }
+
+    public void removePlayerTeamTwo(Player p) {
+        tsTeamTwoPlayer.remove(p);
+    }
+
+    @Override
     public String toString() {
-        return id + " " + date.toString();
+        return id + " " + date;
     }
 
     @Override

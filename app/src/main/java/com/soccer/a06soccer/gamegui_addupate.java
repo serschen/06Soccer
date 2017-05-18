@@ -23,6 +23,7 @@ import java.util.Date;
 import Data.Database;
 import Data.Game;
 
+@SuppressWarnings("deprecation")
 public class gamegui_addupate extends AppCompatActivity implements View.OnClickListener {
     static final int DATE_DIALOG_ID = 0;
     private Button bttnDate = null;
@@ -99,11 +100,11 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
             showDialog(DATE_DIALOG_ID);
         } else if (v == bttnTeam1) {
             Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
-            intent.putExtra("TEAM SELECTED", "Players of team 1");
+            intent.putExtra("TEAM SELECTED", "T1");
             startActivity(intent);
         } else if (v == bttnTeam2) {
             Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
-            intent.putExtra("TEAM SELECTED", "Players of team 2");
+            intent.putExtra("TEAM SELECTED", "T2");
             startActivity(intent);
         } else if (v == bttnRandom) {
 

@@ -90,7 +90,8 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
             Intent intent = new Intent(this, gamegui_addupate.class);
             startActivity(intent);
         } else if (v == btnShow) {
-
+            Intent intent = new Intent(this, gamegui_show.class);
+            startActivity(intent);
         }
     }
 }
