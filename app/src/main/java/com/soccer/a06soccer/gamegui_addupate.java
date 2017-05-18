@@ -17,8 +17,9 @@ import android.content.Intent;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.text.DateFormat;
 import java.util.Calendar;
-
+import java.util.Date;
 import Data.Database;
 import Data.Game;
 
@@ -36,9 +37,11 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
     private Database database = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener = null;
 
-    int mYear = 0;
+
+    int mYear = 117;
     int mMonth = 0;
     int mDay = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
