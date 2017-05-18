@@ -8,6 +8,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAlignment="center"
+        android:textSize="28sp" />
+
+    <TextView
+        android:id="@+id/tvTeamName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
         android:textSize="18sp" />
 
     <ListView

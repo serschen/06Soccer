@@ -2,9 +2,6 @@ package com.soccer.a06soccer;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.icu.text.DateFormat;
-import android.icu.text.SimpleDateFormat;
-import android.icu.util.Calendar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,10 +9,15 @@ import android.view.View;
 import android.widget.AbsListView;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 import Data.Database;
 import Data.Game;
@@ -26,7 +28,10 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
     private Button bttnTeam1 = null;
     private Button bttnTeam2 = null;
     private Button bttnRandom = null;
-    private String teamSelected = null;
+    private TextView tvDate = null;
+    private EditText etTeam1 = null;
+    private EditText etTeam2 = null;
+    private Game currentGame = null;
 
     private Database database = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener = null;
@@ -44,6 +49,10 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
             getAllViews();
             registrateEventHandlers();
             database = Database.getInstance();
+            currentGame = database.getCurrentGame();
+            tvDate.setText(currentGame.getDate().toString());
+            etTeam1.setText("" + currentGame.getGoalsShotTeam1());
+            etTeam2.setText("" + currentGame.getGoalsShotTeam2());
         }
         catch(Exception ex)
         {
@@ -57,6 +66,9 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
         bttnTeam1 = (Button) this.findViewById(R.id.bttnTeam1);
         bttnTeam2 = (Button) this.findViewById(R.id.bttnTeam2);
         bttnRandom = (Button) this.findViewById(R.id.bttnRandom);
+        tvDate = (TextView) this.findViewById(R.id.tvDate);
+        etTeam1 = (EditText) this.findViewById(R.id.etTeam1);
+        etTeam2 = (EditText) this.findViewById(R.id.etTeam2);
     }
 
     public void registrateEventHandlers()
@@ -84,15 +96,23 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
             showDialog(DATE_DIALOG_ID);
         } else if (v == bttnTeam1) {
             Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
-            intent.putExtra("EXTRA_SESSION_ID", teamSelected);
+            intent.putExtra("TEAM SELECTED", "Players of team 1");
             startActivity(intent);
         } else if (v == bttnTeam2) {
             Intent intent = new Intent(getBaseContext(), teampicker_gui.class);
-            intent.putExtra("EXTRA_SESSION_ID", teamSelected);
+            intent.putExtra("TEAM SELECTED", "Players of team 2");
             startActivity(intent);
         } else if (v == bttnRandom) {
 
         }
+    }
+
+    @Override
+    public void onBackPressed () {
+        currentGame.setGoalsShotTeam1(Integer.parseInt(etTeam1.getText().toString()));
+        currentGame.setGoalsShotTeam2(Integer.parseInt(etTeam2.getText().toString()));
+
+        super.onBackPressed();
     }
 
     @Override
