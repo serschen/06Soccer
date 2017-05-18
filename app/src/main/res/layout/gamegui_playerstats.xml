@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvPlayername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAlignment="center"
+        android:textSize="24sp" />
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2"
+        android:rowCount="5">
+
+        <TextView
+            android:id="@+id/tvGoalDefault"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Goal Default:"
+            android:textAlignment="textStart"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/etGoalDefault"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvGoalPenalty"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Goal Penalty:"
+            android:textAlignment="textStart"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/etGoalPenalty"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvGoalHeadSnow"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Goal Head Snow:"
+            android:textAlignment="textStart"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/etGoalHeadSnow"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvGoalOwn"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Goal Own:"
+            android:textAlignment="textStart"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/etGoalOwn"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/tvNuttmeg"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:text="Nuttmeg:"
+            android:textAlignment="textStart"
+            android:textSize="24sp" />
+
+        <EditText
+            android:id="@+id/etNuttmeg"
+            android:layout_width="191.5dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="40dp"
+            android:background="@android:color/transparent"
+            android:ems="10"
+            android:inputType="number"
+            android:text="0"
+            android:textAlignment="center"
+            android:textSize="24sp" />
+    </GridLayout>
+</LinearLayout>

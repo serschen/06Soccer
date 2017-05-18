@@ -16,15 +16,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".playergui_main"/>
-        <activity android:name=".positiongui"/>
-        <activity android:name=".gamegui_main"/>
-        <activity android:name=".gamegui_addupate"/>
-        <activity android:name=".statsgui_main"/>
+        <activity android:name=".playergui_main" />
+        <activity android:name=".positiongui" />
+        <activity android:name=".gamegui_main" />
+        <activity android:name=".gamegui_addupate" />
+        <activity android:name=".statsgui_main" />
         <activity android:name=".playerstats_overall" />
         <activity android:name=".teampicker_gui" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".gamegui_show"/>
+        <activity android:name=".MainActivity" />
+        <activity android:name=".gamegui_show" />
+        <activity android:name=".gamegui_playerstats"></activity>
     </application>
 
 </manifest>
