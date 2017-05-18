@@ -51,10 +51,12 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
 
             if (teamSelected.equals("T1")) {
                 alPlayerAll.removeAll(db.getCurrentGame().getTsTeamOnePlayer());
+                alPlayerAll.removeAll(db.getCurrentGame().getTsTeamTwoPlayer());
                 alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
                 tvTeamName.setText("Players of Team One");
             }
             else {
+                alPlayerAll.removeAll(db.getCurrentGame().getTsTeamOnePlayer());
                 alPlayerAll.removeAll(db.getCurrentGame().getTsTeamTwoPlayer());
                 alPlayerSel = db.getCurrentGame().getTsTeamTwoPlayer();
                 tvTeamName.setText("Players of Team Two");
