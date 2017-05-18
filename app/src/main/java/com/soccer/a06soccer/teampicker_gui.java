@@ -47,17 +47,20 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
             registrateEventHandlers();
             db = Database.getInstance();
             alPlayerAll = db.getPlayers();
-            updateAllPlayerList();
             teamSelected = getIntent().getStringExtra("TEAM SELECTED");
-            tvTeamName.setText(teamSelected);
 
-            if (teamSelected == "Team 1") {
+            if (teamSelected.equals("T1")) {
+                alPlayerAll.removeAll(db.getCurrentGame().getTsTeamOnePlayer());
                 alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
+                tvTeamName.setText("Players of Team One");
             }
             else {
+                alPlayerAll.removeAll(db.getCurrentGame().getTsTeamTwoPlayer());
                 alPlayerSel = db.getCurrentGame().getTsTeamTwoPlayer();
+                tvTeamName.setText("Players of Team Two");
             }
 
+            updateAllPlayerList();
             updateSelPlayerList();
         }
         catch(Exception ex)
@@ -92,25 +95,27 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
                 movePlayer = alPlayerAll.remove(curPositionAll);
                 updateAllPlayerList();
 
-                if (teamSelected == "Team 1") {
+                if (teamSelected.equals("T1")) {
                     db.addPlayerTeamOne(movePlayer);
+                    alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
                 } else {
                     db.addPlayerTeamTwo(movePlayer);
+                    alPlayerSel = db.getCurrentGame().getTsTeamTwoPlayer();
                 }
 
-                alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
                 updateSelPlayerList();
             } else if (v == bttnRemove) {
                 movePlayer = alPlayerSel.remove(curPositionSel);
                 updateAllPlayerList();
 
-                if (teamSelected == "Team 1") {
+                if (teamSelected.equals("T1")) {
                     db.removePlayerTeamOne(movePlayer);
+                    alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
                 } else {
                     db.removePlayerTeamTwo(movePlayer);
+                    alPlayerSel = db.getCurrentGame().getTsTeamTwoPlayer();
                 }
 
-                alPlayerSel = db.getCurrentGame().getTsTeamOnePlayer();
                 updateSelPlayerList();
             }
         }
