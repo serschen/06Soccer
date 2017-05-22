@@ -108,6 +108,7 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
                 updateSelPlayerList();
             } else if (v == bttnRemove) {
                 movePlayer = alPlayerSel.remove(curPositionSel);
+                adapterAll.add(movePlayer);
                 updateAllPlayerList();
 
                 if (teamSelected.equals("T1")) {
