@@ -18,6 +18,7 @@ import android.content.Intent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 
 import Data.Database;
 import Data.Game;
@@ -87,6 +88,8 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
                 Calendar cal = Calendar.getInstance();
                 cal.set(year, month, dayOfMonth);
                 DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                currentGame.setDate(new Date(mYear, mMonth, mDay));
+                tvDate.setText(currentGame.getDate().toString());
             }
         };
     }
