@@ -102,6 +102,8 @@ public class Database {
         tsPlayer.add(new Player(getId(), "Peter", null));
         tsPlayer.add(new Player(getId(), "Hans", null));
         tsPlayer.add(new Player(getId(), "OG", null));
+        tsPlayer.add(new Player(getId(), "Lukas", null));
+        tsPlayer.add(new Player(getId(), "Rudolf", null));
     }
 
     public void defaultGames()
