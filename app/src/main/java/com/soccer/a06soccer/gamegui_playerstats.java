@@ -48,7 +48,13 @@ public class gamegui_playerstats extends AppCompatActivity {
     }
 
     private void updateStats() {
+        Player loadPlayer = db.getCurrentPlayer();
 
+        etGoalDefault.setText(loadPlayer.getGoalDefault() + "");
+        etGoalPenalty.setText(loadPlayer.getGoalPenalty() + "");
+        etGoalHeadSnow.setText(loadPlayer.getGoalHeadSnow() + "");
+        etGoalOwn.setText(loadPlayer.getGoalOwn() + "");
+        etNuttmeg.setText(loadPlayer.getNuttmeg() + "");
     }
 
     @Override

@@ -41,6 +41,7 @@ public class gamegui_show extends AppCompatActivity implements AdapterView.OnIte
             db = Database.getInstance();
             getAllViews();
             registrateEventHandlers();
+
             tvDate.setText(db.getCurrentGame().getDate().toString());
             tvTeam1.setText("Team 1 - " + db.getCurrentGame().getGoalsShotTeam1());
             tvTeam2.setText("Team 2 - " + db.getCurrentGame().getGoalsShotTeam2());
@@ -99,7 +100,13 @@ public class gamegui_show extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        db.setCurrentPlayer(db.getPlayers().get(position));
+        if (parent.equals(team1)) {
+            db.setCurrentPlayer(adapterTeamOne.getItem(position));
+        }
+        else
+        {
+            db.setCurrentPlayer(adapterTeamTwo.getItem(position));
+        }
 
         Intent intent = new Intent(this, gamegui_playerstats.class);
         startActivity(intent);
