@@ -19,7 +19,7 @@ import Data.Player;
  * Created by anton on 17.05.2017.
  */
 
-public class gamegui_show extends AppCompatActivity implements AdapterView.OnItemLongClickListener {
+public class gamegui_show extends AppCompatActivity implements AdapterView.OnItemLongClickListener, AdapterView.OnItemClickListener {
     private Database db = null;
     private TextView tvDate = null;
     private TextView tvTeam1 = null;
@@ -65,8 +65,10 @@ public class gamegui_show extends AppCompatActivity implements AdapterView.OnIte
 
     public void registrateEventHandlers()
     {
-        team1.setOnItemLongClickListener(this);
-        team2.setOnItemLongClickListener(this);
+        //team1.setOnItemLongClickListener(this);
+        //team2.setOnItemLongClickListener(this);
+        team1.setOnItemClickListener(this);
+        team2.setOnItemClickListener(this);
     }
 
     public void loadPlayers()
@@ -90,8 +92,16 @@ public class gamegui_show extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
-        db.setCurrentPlayer(db.getPlayers().get(position));
+        //db.setCurrentPlayer(db.getPlayers().get(position));
 
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        db.setCurrentPlayer(db.getPlayers().get(position));
+
+        Intent intent = new Intent(this, gamegui_playerstats.class);
+        startActivity(intent);
     }
 }
