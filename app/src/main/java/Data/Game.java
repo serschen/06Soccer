@@ -1,6 +1,7 @@
 package Data;
 
 import java.lang.reflect.Array;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
@@ -16,6 +17,11 @@ public class Game implements Comparable<Game>{
     private int goalsShotTeam2 = 0;
     private TreeSet<Player> tsTeamOnePlayer = null;
     private TreeSet<Player> tsTeamTwoPlayer = null;
+
+    //currentGame = database.getCurrentGame();
+
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
 
     public Game()
     {
@@ -103,7 +109,8 @@ public class Game implements Comparable<Game>{
 
     @Override
     public String toString() {
-        return id + " " + date;
+        String sdate = dateFormat.format(date);
+        return id + ") " + sdate;
     }
 
     @Override

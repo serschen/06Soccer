@@ -14,15 +14,14 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.content.Intent;
-
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.text.DateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import Data.Database;
 import Data.Game;
-
 @SuppressWarnings("deprecation")
 public class gamegui_addupate extends AppCompatActivity implements View.OnClickListener {
     static final int DATE_DIALOG_ID = 0;
@@ -34,13 +33,15 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
     private EditText etTeam1 = null;
     private EditText etTeam2 = null;
     private Game currentGame = null;
-
+    private Date currentDate = null;
     private Database database = null;
     private DatePickerDialog.OnDateSetListener mDateSetListener = null;
 
+    SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+
     private Calendar calendar = Calendar.getInstance();
 
-    int mYear = calendar.get(Calendar.YEAR) - 1900;
+    int mYear = calendar.get(Calendar.YEAR);
     int mMonth = calendar.get(Calendar.MONTH);
     int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
@@ -56,7 +57,13 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
             registrateEventHandlers();
             database = Database.getInstance();
             currentGame = database.getCurrentGame();
-            tvDate.setText(currentGame.getDate().toString());
+            currentDate = currentGame.getDate();
+
+
+            String sdate = dateFormat.format(currentDate);
+
+            tvDate.setText(sdate);
+
             etTeam1.setText("" + currentGame.getGoalsShotTeam1());
             etTeam2.setText("" + currentGame.getGoalsShotTeam2());
         }
@@ -87,11 +94,20 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                 mYear = year;
-                mMonth = month;
+                mMonth = month + 1;
                 mDay = dayOfMonth;
                 Calendar cal = Calendar.getInstance();
                 cal.set(year, month, dayOfMonth);
-                DateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
+                String showDate = mDay + "." + mMonth + "." + mYear;
+                tvDate.setText(showDate);      //Date wird aktualisiert
+
+                Date newDate = null;
+                try {
+                    newDate = dateFormat.parse(showDate);
+                } catch (ParseException e) {
+                    Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+                currentGame.setDate(newDate);   //Datum wird beim Game gespeichert
             }
         };
     }
