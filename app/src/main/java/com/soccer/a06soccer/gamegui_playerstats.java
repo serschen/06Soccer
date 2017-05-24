@@ -22,11 +22,13 @@ public class gamegui_playerstats extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gamegui_playerstats);
-        tvPlayername.setText(db.getCurrentPlayer().getName());
 
         try {
             getAllViews();
+            registrateEventHandlers();
+
             db = Database.getInstance();
+            tvPlayername.setText(db.getCurrentPlayer().getName());
         }
         catch(Exception ex)
         {
@@ -36,11 +38,16 @@ public class gamegui_playerstats extends AppCompatActivity {
 
     public void getAllViews()
     {
-        tvPlayername = (TextView) this.findViewById(R.id.tvTeamName);
+        tvPlayername = (TextView) this.findViewById(R.id.tvPlayername);
         etGoalDefault = (EditText) this.findViewById(R.id.etGoalDefault);
         etGoalPenalty = (EditText) this.findViewById(R.id.etGoalPenalty);
         etGoalHeadSnow = (EditText) this.findViewById(R.id.etGoalHeadSnow);
         etGoalOwn = (EditText) this.findViewById(R.id.etGoalOwn);
         etNuttmeg = (EditText) this.findViewById(R.id.etNuttmeg);
+    }
+
+    public void registrateEventHandlers()
+    {
+
     }
 }
