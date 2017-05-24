@@ -1,6 +1,5 @@
 package com.soccer.a06soccer;
 
-import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.EditText;
@@ -8,6 +7,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Data.Database;
+import Data.Player;
 
 public class gamegui_playerstats extends AppCompatActivity {
     private TextView tvPlayername = null;
@@ -26,9 +26,9 @@ public class gamegui_playerstats extends AppCompatActivity {
 
         try {
             getAllViews();
-            registrateEventHandlers();
 
             db = Database.getInstance();
+            updateStats();
             tvPlayername.setText(db.getCurrentPlayer().getName());
         }
         catch(Exception ex)
@@ -47,8 +47,22 @@ public class gamegui_playerstats extends AppCompatActivity {
         etNuttmeg = (EditText) this.findViewById(R.id.etNuttmeg);
     }
 
-    public void registrateEventHandlers()
-    {
+    private void updateStats() {
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        Player updatedPlayer = db.getCurrentPlayer();
+
+        updatedPlayer.setGoalDefault(Integer.parseInt(etGoalDefault.getText().toString()));
+        updatedPlayer.setGoalPenalty(Integer.parseInt(etGoalPenalty.getText().toString()));
+        updatedPlayer.setGoalHeadSnow(Integer.parseInt(etGoalHeadSnow.getText().toString()));
+        updatedPlayer.setGoalOwn(Integer.parseInt(etGoalOwn.getText().toString()));
+        updatedPlayer.setNuttmeg(Integer.parseInt(etNuttmeg.getText().toString()));
+
+        db.setCurrentPlayer(updatedPlayer);
+
+        super.onBackPressed();
     }
 }
