@@ -30,6 +30,7 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
     private Button btnUpdate = null;
     private Button btnShow = null;
     private ArrayAdapter<Game> adapter = null;
+    private int curPosition = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +76,7 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
 
     @Override
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        curPosition = position;
         database.setCurrentGame((Game) parent.getItemAtPosition(position));
     }
 
@@ -83,15 +85,25 @@ public class gamegui_main extends AppCompatActivity implements AdapterView.OnIte
         if (v == btnAdd) {
             database.addGame(new Game());
             getData();
-        } else if (v == btnRemove) {
-            database.removeGame(database.getCurrentGame());
-            getData();
-        } else if (v == btnUpdate) {
-            Intent intent = new Intent(this, gamegui_addupate.class);
-            startActivity(intent);
-        } else if (v == btnShow) {
-            Intent intent = new Intent(this, gamegui_show.class);
-            startActivity(intent);
+        }
+        else {
+            if(curPosition != -1) {
+                if(v == btnRemove) {
+                    database.removeGame(database.getCurrentGame());
+                    getData();
+                    curPosition = -1;
+                } else if (v == btnUpdate) {
+                    Intent intent = new Intent(this, gamegui_addupate.class);
+                    startActivity(intent);
+                } else if (v == btnShow) {
+                    Intent intent = new Intent(this, gamegui_show.class);
+                    startActivity(intent);
+                }
+            }
+            else
+            {
+                Toast.makeText(getApplicationContext(), "No Game selected", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 }

@@ -45,8 +45,14 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(this, playerstats_overall.class);
-        startActivity(intent);
+        if(curPos != -1) {
+            Intent intent = new Intent(this, playerstats_overall.class);
+            startActivity(intent);
+        }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "No Player selected", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @Override
