@@ -18,6 +18,7 @@ public class Database {
     private Player currentPlayer = null;
     private Game currentGame = null;
     private Userdata loggedInUser = null;
+    private TreeSet<Player> filteredPlayer = null;
 
     public Database()
     {
@@ -163,5 +164,20 @@ public class Database {
 
         //return ret;
         return true;
+    }
+
+    public ArrayList<Player> getFilteredPlayer (String name)
+    {
+        filteredPlayer = new TreeSet<Player>();
+        String currPlayerName = null;
+        for(Player player : tsPlayer)
+        {
+            currPlayerName = player.getName();
+            if(currPlayerName.contains(name))
+            {
+                filteredPlayer.add(player);
+            }
+        }
+        return new ArrayList<>(filteredPlayer);
     }
 }

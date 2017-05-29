@@ -1,5 +1,6 @@
 package com.soccer.a06soccer;
 
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -38,9 +39,13 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     private int curPosition = -1;
     private ArrayAdapter<Player> adapter = null;
     private AlertDialog dialog = null;
+    private AlertDialog dialogSearch = null;
     private EditText txtNameDialog = null;
     private Button btnAddPlayerDialog = null;
     private Button btnCancelAddPlayerDialog = null;
+    private Button btnSearch = null;
+    private EditText etSearch = null;
+    private Button btnSearchDialog = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +58,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             database = Database.getInstance();
             updatePlayerList();
             createDialog();
+            createSearchDialog();
         }
         catch(Exception ex)
         {
@@ -69,6 +75,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         btnUpdate = (Button) this.findViewById(R.id.btnUpdate);
         txtMessage = (TextView) this.findViewById(R.id.txtMessage);
         playerList = (ListView) this.findViewById(R.id.listView);
+        btnSearch = (Button) this.findViewById(R.id.btnSearch);
     }
 
     public void registrateEventHandlers()
@@ -78,6 +85,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         btnUpdate.setOnClickListener(this);
         playerList.setOnItemClickListener(this);
         playerList.setChoiceMode(AbsListView.CHOICE_MODE_SINGLE);
+        btnSearch.setOnClickListener(this);
         //playerList.setMultiChoiceModeListener(this);
     }
 
@@ -114,6 +122,17 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         {
             dialog.hide();
             txtNameDialog.setText("");
+        }
+        else if(v == btnSearch)
+        {
+            search();
+        }
+        else if(v == btnSearchDialog)
+        {
+            dialogSearch.hide();
+            updateList(etSearch.getText().toString());
+            etSearch.setText("");
+
         }
     }
 
@@ -189,6 +208,17 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         dialog = builder.create();
     }
 
+    public void createSearchDialog()
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(playergui_main.this);
+        View view = getLayoutInflater().inflate(R.layout.searchplayer_dialog, null);
+        etSearch = (EditText) view.findViewById(R.id.etSearchPlayerDialog);
+        btnSearchDialog = (Button) view.findViewById(R.id.btnSearchDialog);
+        btnSearchDialog.setOnClickListener(this);
+        builder.setView(view);
+        dialogSearch = builder.create();
+    }
+
     public void update()
     {
         if(curPosition != -1)
@@ -203,4 +233,20 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
                     .show();
         }
     }
+
+    public void updateList(String name)
+    {
+        adapter = new ArrayAdapter<>(
+                this,
+                android.R.layout.simple_list_item_1,
+                database.getFilteredPlayer(name)
+        );
+        playerList.setAdapter(adapter);
+    }
+
+    public void search()
+    {
+        dialogSearch.show();
+    }
+
 }
