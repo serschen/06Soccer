@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import Data.Database;
@@ -24,6 +25,8 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
     private Database db = null;
     private int curPos = -1;
     private ArrayAdapter<Player>adapter = null;
+    private Spinner spSpats = null;
+    private String[] arraySpinner = new String[] {"GoalDiff","GoalsShot","GoalsGot","GoalHead","GoalHeadSnow","GoalOwn","GoalDefault","GoalPenalty","Nutmeg"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +37,7 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
             registrateEventHandlers();
             db = Database.getInstance();
             loadPlayer();
+            fillSpinner();
         }
         catch(Exception ex)
         {
@@ -65,6 +69,7 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
     {
         btnShow = (Button) this.findViewById(R.id.btnShow);
         lvPlayer = (ListView) this.findViewById(R.id.listViewPlayer);
+        spSpats = (Spinner) this.findViewById(R.id.spRanking);
     }
 
     public void registrateEventHandlers()
@@ -80,5 +85,11 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
                 db.getPlayers()
         );
         lvPlayer.setAdapter(adapter);
+    }
+
+    public void fillSpinner() {
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, arraySpinner);
+        spSpats.setAdapter(adapter);
     }
 }
