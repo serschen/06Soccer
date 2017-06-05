@@ -1,8 +1,29 @@
 package Data;
 
+import android.os.AsyncTask;
+import android.os.StrictMode;
+
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.reflect.TypeToken;
+
+import junit.framework.Test;
+
+import java.math.BigInteger;
+import java.net.HttpURLConnection;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
+import java.util.concurrent.ExecutionException;
+import java.util.logging.Handler;
+import java.util.logging.LogRecord;
+
+import NetworkHandler.Controller;
+import NetworkHandler.PlayerHandler;
 
 /**
  * Created by anton on 27.03.2017.
@@ -17,7 +38,7 @@ public class Database {
     private int gameId = 0;
     private Player currentPlayer = null;
     private Game currentGame = null;
-    private Userdata loggedInUser = null;
+    private Player loggedInUser = null;
     private TreeSet<Player> filteredPlayer = null;
 
     public Database()
@@ -117,7 +138,7 @@ public class Database {
 
     public void defaultUsers()
     {
-        tsUserdata.add(new Userdata("test", "test", "a"));
+        //tsUserdata.add(new Userdata("test", "test", "a"));
     }
 
     public TreeSet<Userdata> getTsUserdata() {
@@ -149,21 +170,36 @@ public class Database {
         this.tsUserdata = tsUserdata;
     }
 
-    public Boolean checkUserData(String username, String password)
-    {
+    public Boolean checkUserData(String username, String password) throws Exception {
         Boolean ret = false;
+        Gson g = new Gson();
 
-        for(Userdata user:tsUserdata)
-        {
-            if(user.getUsername().equals(username) && user.getPassword().equals(password))
+        String[] paras = new String[1];
+        paras[0] = "/player/auth?username=" + username + "&password=" + convertPassMd5(password);
+        Controller controller = new Controller();
+        controller.execute(paras);
+        try {
+            String response = controller.get();
+
+            if(response.isEmpty())
             {
-                loggedInUser = user;
+                throw new Exception("Wrong Login data");
+            }
+            else
+            {
+                PlayerHandler ph = new PlayerHandler();
+                ph.execute(response);
+                loggedInUser = ph.get();
+
                 ret = true;
             }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         }
 
-        //return ret;
-        return true;
+        return ret;
     }
 
     public ArrayList<Player> getFilteredPlayer (String name)
@@ -179,5 +215,30 @@ public class Database {
             }
         }
         return new ArrayList<>(filteredPlayer);
+    }
+
+    public static String convertPassMd5(String pass) {
+        String password = null;
+        MessageDigest mdEnc;
+        try {
+            mdEnc = MessageDigest.getInstance("MD5");
+            mdEnc.update(pass.getBytes(), 0, pass.length());
+            pass = new BigInteger(1, mdEnc.digest()).toString(16);
+            while (pass.length() < 32) {
+                pass = "0" + pass;
+            }
+            password = pass;
+        } catch (NoSuchAlgorithmException e1) {
+            e1.printStackTrace();
+        }
+        return password;
+    }
+
+    public Player getLoggedInUser() {
+        return loggedInUser;
+    }
+
+    public void setLoggedInUser(Player loggedInUser) {
+        this.loggedInUser = loggedInUser;
     }
 }

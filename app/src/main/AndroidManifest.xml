@@ -26,6 +26,12 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".gamegui_show" />
         <activity android:name=".gamegui_playerstats"/>
-    </application>
+        <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+        <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
 
+        <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+        <uses-permission android:name="android.permission.READ_PHONE_STATE"></uses-permission>
+        <uses-permission android:name="android.permission.DOWNLOAD_WITHOUT_NOTIFICATION" />
+    </application>
+    <uses-permission android:name="android.permission.INTERNET"/>
 </manifest>

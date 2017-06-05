@@ -5,5 +5,5 @@ package Data;
  */
 
 public enum Position {
-    GOALIE, DEFENDER, MIDFIELDER, FORWARD
+    GOALIE, DEFENDER, MIDFIELDER, ATTACK
 }

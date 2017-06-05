@@ -86,7 +86,7 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
             {
                 cbMidfielder.setChecked(true);
             }
-            if(tsPosition.contains(Position.FORWARD))
+            if(tsPosition.contains(Position.ATTACK))
             {
                 cbForward.setChecked(true);
             }
@@ -111,7 +111,7 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
             } else if (buttonView == cbDefender) {
                 pos = Position.DEFENDER;
             } else if (buttonView == cbForward) {
-                pos = Position.FORWARD;
+                pos = Position.ATTACK;
             } else if (buttonView == cbMidfielder) {
                 pos = Position.MIDFIELDER;
             }

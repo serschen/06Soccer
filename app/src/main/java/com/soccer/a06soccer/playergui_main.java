@@ -73,7 +73,6 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         btnAdd = (Button) this.findViewById(R.id.btnAdd);
         btnRemove = (Button) this.findViewById(R.id.btnRemove);
         btnUpdate = (Button) this.findViewById(R.id.btnUpdate);
-        txtMessage = (TextView) this.findViewById(R.id.txtMessage);
         playerList = (ListView) this.findViewById(R.id.listView);
         btnSearch = (Button) this.findViewById(R.id.btnSearch);
     }

@@ -1,6 +1,7 @@
 package com.soccer.a06soccer;
 
 import android.content.Intent;
+import android.provider.ContactsContract;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +10,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import Data.Database;
+import Data.Player;
+
 //192.168.194.27:8080
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     Button btnPlayer = null;
     Button btnGames = null;
     Button btnStats = null;
     TextView messageLine = null;
+    Database database = null;
+    Player loggedInUser = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +29,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         try{
             getAllViews();
             registrateEventHandlers();
+            database = Database.getInstance();
+            loggedInUser = database.getLoggedInUser();
+            messageLine.setText("Logged in as " + loggedInUser.getName());
         }
         catch(Exception ex)
         {
