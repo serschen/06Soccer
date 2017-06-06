@@ -5,4 +5,5 @@ package NetworkHandler;
  */
 
 public class SetPassword {
+
 }

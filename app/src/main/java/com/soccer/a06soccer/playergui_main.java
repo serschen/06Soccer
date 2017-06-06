@@ -195,12 +195,20 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     }
 
     public void addPlayer() throws ExecutionException, InterruptedException {
-        Player player = new Player(null, txtNameDialog.getText().toString(), txtUsername.getText().toString(), true);
-        database.addPlayer(player);
-        updatePlayerList();
-        Toast.makeText(getApplicationContext(),
-                 "Added", Toast.LENGTH_SHORT)
-                .show();
+        try {
+            Player player = new Player(null, txtNameDialog.getText().toString(), txtUsername.getText().toString(), true);
+            database.addPlayer(player);
+            updatePlayerList();
+            Toast.makeText(getApplicationContext(),
+                    "Added", Toast.LENGTH_SHORT)
+                    .show();
+        }
+        catch(Exception ex)
+        {
+            Toast.makeText(getApplicationContext(),
+                    ex.getMessage(), Toast.LENGTH_SHORT)
+                    .show();
+        }
     }
 
     public void createDialog()

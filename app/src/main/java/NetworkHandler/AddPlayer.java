@@ -31,7 +31,6 @@ public class AddPlayer extends AsyncTask<Player, Void, String> {
 
     @Override
     protected String doInBackground(Player... params) {
-        StringBuilder result = null;
         Gson gson = new Gson();
         HttpClient client = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
@@ -49,6 +48,6 @@ public class AddPlayer extends AsyncTask<Player, Void, String> {
             e.printStackTrace();
         }
 
-        return result.toString();
+        return null;
     }
 }
