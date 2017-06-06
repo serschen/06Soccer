@@ -21,9 +21,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import Data.Database;
 import Data.Player;
+import Data.Position;
 
 /**
  * Created by anton on 26.04.2017.
@@ -46,6 +48,8 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     private Button btnSearch = null;
     private EditText etSearch = null;
     private Button btnSearchDialog = null;
+    private TextView txtUsername = null;
+    private TextView txtPassword = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -106,7 +110,13 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         {
             if(!txtNameDialog.getText().toString().isEmpty())
             {
-                addPlayer();
+                try {
+                    addPlayer();
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
                 dialog.hide();
                 txtNameDialog.setText("");
             }
@@ -135,7 +145,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void updatePlayerList() {
+    public void updatePlayerList() throws ExecutionException, InterruptedException {
         adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,
@@ -158,7 +168,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             {
                 database.removePlayer(curPlayer);
                 Toast.makeText(getApplicationContext(),
-                        curPlayer.getName() + " removed", Toast.LENGTH_SHORT)
+                        "Removed", Toast.LENGTH_SHORT)
                         .show();
                 updatePlayerList();
                 curPosition = -1;
@@ -184,13 +194,12 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         dialog.show();
     }
 
-    public void addPlayer()
-    {
-        Player player = new Player(database.getId(), txtNameDialog.getText().toString(), null);
+    public void addPlayer() throws ExecutionException, InterruptedException {
+        Player player = new Player(null, txtNameDialog.getText().toString(), txtUsername.getText().toString(), true);
         database.addPlayer(player);
         updatePlayerList();
         Toast.makeText(getApplicationContext(),
-                player.getName() + " added", Toast.LENGTH_SHORT)
+                 "Added", Toast.LENGTH_SHORT)
                 .show();
     }
 
@@ -199,6 +208,8 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         AlertDialog.Builder builder = new AlertDialog.Builder(playergui_main.this);
         View view = getLayoutInflater().inflate(R.layout.addplayer_dialog, null);
         txtNameDialog = (EditText) view.findViewById(R.id.txtPlayerNameDialog);
+        txtUsername = (EditText) view.findViewById(R.id.txtUsernameDialog);
+        txtPassword = (EditText) view.findViewById(R.id.txtPasswordDialog);
         btnAddPlayerDialog = (Button) view.findViewById(R.id.btnAddPlayerDialog);
         btnCancelAddPlayerDialog = (Button) view.findViewById(R.id.btnCancelAddPlayerDialog);
         btnAddPlayerDialog.setOnClickListener(this);

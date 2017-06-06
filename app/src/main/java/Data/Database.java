@@ -22,7 +22,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.logging.Handler;
 import java.util.logging.LogRecord;
 
+import NetworkHandler.AddPlayer;
 import NetworkHandler.Controller;
+import NetworkHandler.PlayerCollectionHandler;
 import NetworkHandler.PlayerHandler;
 
 /**
@@ -75,7 +77,10 @@ public class Database {
 
     public void addPlayer(Player p)
     {
-        tsPlayer.add(p);
+        Player[] player = new Player[1];
+        player[0] = p;
+        AddPlayer addPlayer = new AddPlayer();
+        addPlayer.execute(player);
     }
 
     public void removePlayer(Player p)
@@ -109,9 +114,18 @@ public class Database {
         currentGame.removePlayerTeamTwo(oldPlayer);
     }
 
-    public ArrayList<Player> getPlayers()
-    {
-        return new ArrayList<>(tsPlayer);
+    public ArrayList<Player> getPlayers() throws ExecutionException, InterruptedException {
+        ArrayList<Player> list = null;
+        String[] paras = new String[1];
+        paras[0] = "/player/all";
+        Controller controller = new Controller();
+        controller.execute(paras);
+
+        PlayerCollectionHandler pch = new PlayerCollectionHandler();
+        pch.execute(controller.get());
+        list = pch.get();
+
+        return list;
     }
 
     public ArrayList<Game> getGames()

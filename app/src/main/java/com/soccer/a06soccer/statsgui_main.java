@@ -12,6 +12,8 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.concurrent.ExecutionException;
+
 import Data.Database;
 import Data.Player;
 
@@ -78,7 +80,7 @@ public class statsgui_main extends AppCompatActivity implements View.OnClickList
         lvPlayer.setOnItemClickListener(this);
     }
 
-    public void loadPlayer() {
+    public void loadPlayer() throws ExecutionException, InterruptedException {
         adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,

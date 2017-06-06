@@ -30,11 +30,9 @@ public class Controller extends AsyncTask<String, Void, String>{
 
     @Override
     protected String doInBackground(String... params) {
-        //StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
-        //StrictMode.setThreadPolicy(policy);
-
         StringBuilder stringBuilder = new StringBuilder();
         HttpClient httpClient = new DefaultHttpClient();
+
         String url = fix_url + params[0];
         HttpGet httpGet = new HttpGet(url);
         httpGet.setHeader("Content-Type", "application/json");

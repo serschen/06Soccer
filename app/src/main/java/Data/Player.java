@@ -56,6 +56,14 @@ public class Player implements Comparable<Player> {
         setAdmin(admin);
     }
 
+    public Player(ArrayList<Position> positions, String name, String username, Boolean admin)
+    {
+        this.positions = positions;
+        setName(name);
+        setUsername(username);
+        setAdmin(admin);
+    }
+
     public int getId() {
         return id;
     }
