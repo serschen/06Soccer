@@ -41,11 +41,9 @@ public class gamegui_addupate extends AppCompatActivity implements View.OnClickL
 
     private Calendar calendar = Calendar.getInstance();
 
-    int mYear = calendar.get(Calendar.YEAR);
-    int mMonth = calendar.get(Calendar.MONTH);
-    int mDay = calendar.get(Calendar.DAY_OF_MONTH);
-
-
+    private int mYear = calendar.get(Calendar.YEAR);
+    private int mMonth = calendar.get(Calendar.MONTH);
+    private int mDay = calendar.get(Calendar.DAY_OF_MONTH);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

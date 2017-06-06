@@ -1,8 +1,10 @@
 package Data;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.TreeSet;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Created by anton on 27.03.2017.
@@ -19,6 +21,7 @@ public class Database {
     private Game currentGame = null;
     private Userdata loggedInUser = null;
     private TreeSet<Player> filteredPlayer = null;
+    private TreeSet<Game> filteredGames = null;
 
     public Database()
     {
@@ -168,7 +171,7 @@ public class Database {
 
     public ArrayList<Player> getFilteredPlayer (String name)
     {
-        filteredPlayer = new TreeSet<Player>();
+
         String currPlayerName = null;
         for(Player player : tsPlayer)
         {
@@ -180,4 +183,53 @@ public class Database {
         }
         return new ArrayList<>(filteredPlayer);
     }
+
+    public ArrayList<Game> getFilteredGames (int year, int month, int day)
+    {
+        String retValues;
+        int currGameYear = 0;
+        int currGameMonth = 0;
+        int currGameDay = 0;
+        SimpleDateFormat formatyear = new SimpleDateFormat("yyyy");
+        SimpleDateFormat formatmonth = new SimpleDateFormat("MM");
+        SimpleDateFormat formatday = new SimpleDateFormat("dd");
+
+        filteredGames = new TreeSet<>();
+
+        for(Game game : tsGame)
+        {
+            Date currDate = game.getDate();
+            currGameYear = Integer.parseInt(formatyear.format(currDate));
+            currGameMonth = Integer.parseInt(formatmonth.format(currDate));
+            currGameDay = Integer.parseInt(formatday.format(currDate));
+
+            if(year == 0 | year == currGameYear)
+            {
+                if (month == 0 | month == currGameMonth)
+                {
+                    if(day == 0 | day == currGameDay)
+                    {
+                        filteredGames.add(game);
+                    }
+                }
+
+            }
+
+        }
+        return new ArrayList<Game>(filteredGames);
+    }
+
+    public int checkData(String data) throws Exception
+    {
+        int retValue = 0;
+
+        if(!data.equals(""))
+        {
+
+            retValue = Integer.parseInt(data);
+        }
+
+        return retValue;
+    }
+
 }
