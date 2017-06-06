@@ -25,6 +25,7 @@ public class Player implements Comparable<Player> {
     private Integer numDraws = 0;
     private Float goalDifference = (float) 0.0;
     private Boolean admin = false;
+    private String password = null;
 
     public Player()
     {
@@ -172,6 +173,14 @@ public class Player implements Comparable<Player> {
 
     public void setAdmin(Boolean admin) {
         this.admin = admin;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String toString()

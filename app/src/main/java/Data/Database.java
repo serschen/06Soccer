@@ -27,6 +27,7 @@ import NetworkHandler.Controller;
 import NetworkHandler.DeletePlayer;
 import NetworkHandler.PlayerCollectionHandler;
 import NetworkHandler.PlayerHandler;
+import NetworkHandler.SetPassword;
 
 /**
  * Created by anton on 27.03.2017.
@@ -50,9 +51,7 @@ public class Database {
         tsPlayer = new TreeSet<>();
         tsGame = new TreeSet<>();
         tsUserdata = new TreeSet<>();
-        defaultPlayers();
         defaultGames();
-        defaultUsers();
     }
 
     public static Database getInstance()
@@ -76,12 +75,14 @@ public class Database {
         return gameId;
     }
 
-    public void addPlayer(Player p)
+    public void addPlayer(Player p, String password)
     {
         Player[] player = new Player[1];
         player[0] = p;
         AddPlayer addPlayer = new AddPlayer();
         addPlayer.execute(player);
+
+        //setPassword(p, password);
     }
 
     public String removePlayer(Player p) throws ExecutionException, InterruptedException {
@@ -90,6 +91,16 @@ public class Database {
         DeletePlayer deletePlayer = new DeletePlayer();
         deletePlayer.execute(player);
         return deletePlayer.get();
+    }
+
+    public void setPassword(Player player, String password)
+    {
+        player.setPassword(convertPassMd5(password));
+        Player[] p = new Player[1];
+        p[0] = player;
+
+        SetPassword setPassword = new SetPassword();
+        setPassword.execute(p);
     }
 
     public void addGame(Game g)
