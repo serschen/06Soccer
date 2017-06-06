@@ -26,7 +26,7 @@ import java.nio.charset.StandardCharsets;
  */
 
 public class Controller extends AsyncTask<String, Void, String>{
-    private String fix_url = "http://192.168.226.131:8080/SoccerREST/g3";
+    private String fix_url = Network.getURL() + "/SoccerREST/g3";
 
     @Override
     protected String doInBackground(String... params) {

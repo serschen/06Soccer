@@ -24,6 +24,7 @@ import java.util.logging.LogRecord;
 
 import NetworkHandler.AddPlayer;
 import NetworkHandler.Controller;
+import NetworkHandler.DeletePlayer;
 import NetworkHandler.PlayerCollectionHandler;
 import NetworkHandler.PlayerHandler;
 
@@ -83,9 +84,12 @@ public class Database {
         addPlayer.execute(player);
     }
 
-    public void removePlayer(Player p)
-    {
-        tsPlayer.remove(p);
+    public String removePlayer(Player p) throws ExecutionException, InterruptedException {
+        Player[] player = new Player[1];
+        player[0] = p;
+        DeletePlayer deletePlayer = new DeletePlayer();
+        deletePlayer.execute(player);
+        return deletePlayer.get();
     }
 
     public void addGame(Game g)
