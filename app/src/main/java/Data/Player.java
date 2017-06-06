@@ -2,6 +2,9 @@ package Data;
 
 import android.support.annotation.NonNull;
 
+import com.google.gson.annotations.SerializedName;
+
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -10,14 +13,18 @@ import java.util.TreeSet;
  */
 
 public class Player implements Comparable<Player> {
-    private int ID = 0;
+
+    private Integer id = 0;
     private String name = "";
+    private String username = "";
+    //@SerializedName("positions")
     private TreeSet<Position> tsPosition = null;
-    private int goalDefault = 0;
-    private int goalPenalty = 0;
-    private int goalHeadSnow = 0;
-    private int goalOwn = 0;
-    private int nuttmeg = 0;
+    private ArrayList<Position> positions = null;
+    private Integer numWins = 0;
+    private Integer numDefeats = 0;
+    private Integer numDraws = 0;
+    private Float goalDifference = (float) 0.0;
+    private Boolean admin = false;
 
     public Player()
     {
@@ -29,17 +36,40 @@ public class Player implements Comparable<Player> {
     {
         super();
         tsPosition = new TreeSet<>();
-        setID(id);
+        setId(id);
         setName(name);
         setTsPositions(positions);
     }
 
-    public int getID() {
-        return ID;
+    public Player(int id, String name, String username, TreeSet<Position> positions, int numWins, int numDefeats, int numDraws, float goalDifference, Boolean admin)
+    {
+        super();
+
+        setId(id);
+        setName(name);
+        setUsername(username);
+        setTsPositions(positions);
+        setNumWins(numWins);
+        setNumDefeats(numDefeats);
+        setNumDraws(numDraws);
+        setGoalDifference(goalDifference);
+        setAdmin(admin);
     }
 
-    public void setID(int ID) {
-        this.ID = ID;
+    public Player(ArrayList<Position> positions, String name, String username, Boolean admin)
+    {
+        this.positions = positions;
+        setName(name);
+        setUsername(username);
+        setAdmin(admin);
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int Id) {
+        this.id = Id;
     }
 
     public String getName() {
@@ -88,53 +118,69 @@ public class Player implements Comparable<Player> {
         }
     }
 
-    public int getGoalDefault() {
-        return goalDefault;
+    public String getUsername() {
+        return username;
     }
 
-    public void setGoalDefault(int goalDefault) {
-        this.goalDefault = goalDefault;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public int getGoalPenalty() {
-        return goalPenalty;
+    public TreeSet<Position> getTsPosition() {
+        return tsPosition;
     }
 
-    public void setGoalPenalty(int goalPenalty) {
-        this.goalPenalty = goalPenalty;
+    public void setTsPosition(TreeSet<Position> tsPosition) {
+        this.tsPosition = tsPosition;
     }
 
-    public int getGoalHeadSnow() {
-        return goalHeadSnow;
+    public int getNumWins() {
+        return numWins;
     }
 
-    public void setGoalHeadSnow(int goalHeadSnow) {
-        this.goalHeadSnow = goalHeadSnow;
+    public void setNumWins(int numWins) {
+        this.numWins = numWins;
     }
 
-    public int getGoalOwn() {
-        return goalOwn;
+    public int getNumDefeats() {
+        return numDefeats;
     }
 
-    public void setGoalOwn(int goalOwn) {
-        this.goalOwn = goalOwn;
+    public void setNumDefeats(int numDefeats) {
+        this.numDefeats = numDefeats;
     }
 
-    public int getNuttmeg() {
-        return nuttmeg;
+    public int getNumDraws() {
+        return numDraws;
     }
 
-    public void setNuttmeg(int nuttmeg) {
-        this.nuttmeg = nuttmeg;
+    public void setNumDraws(int numDraws) {
+        this.numDraws = numDraws;
+    }
+
+    public float getGoalDifference() {
+        return goalDifference;
+    }
+
+    public void setGoalDifference(float goalDifference) {
+        this.goalDifference = goalDifference;
+    }
+
+    public Boolean getAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(Boolean admin) {
+        this.admin = admin;
     }
 
     public String toString()
     {
-        return getID() + " | " + getName();
+        return getId() + " | " + getName();
     }
 
     @Override
     public int compareTo(@NonNull Player o) {
-        return this.getID() - o.getID();
+        return this.getId() - o.getId();
     }
 }

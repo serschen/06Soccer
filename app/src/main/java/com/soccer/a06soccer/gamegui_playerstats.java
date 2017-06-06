@@ -50,22 +50,22 @@ public class gamegui_playerstats extends AppCompatActivity {
     private void updateStats() {
         Player loadPlayer = db.getCurrentPlayer();
 
-        etGoalDefault.setText(loadPlayer.getGoalDefault() + "");
+        /*etGoalDefault.setText(loadPlayer.getGoalDefault() + "");
         etGoalPenalty.setText(loadPlayer.getGoalPenalty() + "");
         etGoalHeadSnow.setText(loadPlayer.getGoalHeadSnow() + "");
         etGoalOwn.setText(loadPlayer.getGoalOwn() + "");
-        etNuttmeg.setText(loadPlayer.getNuttmeg() + "");
+        etNuttmeg.setText(loadPlayer.getNuttmeg() + "");*/
     }
 
     @Override
     public void onBackPressed() {
         Player updatedPlayer = db.getCurrentPlayer();
 
-        updatedPlayer.setGoalDefault(Integer.parseInt(etGoalDefault.getText().toString()));
+        /*updatedPlayer.setGoalDefault(Integer.parseInt(etGoalDefault.getText().toString()));
         updatedPlayer.setGoalPenalty(Integer.parseInt(etGoalPenalty.getText().toString()));
         updatedPlayer.setGoalHeadSnow(Integer.parseInt(etGoalHeadSnow.getText().toString()));
         updatedPlayer.setGoalOwn(Integer.parseInt(etGoalOwn.getText().toString()));
-        updatedPlayer.setNuttmeg(Integer.parseInt(etNuttmeg.getText().toString()));
+        updatedPlayer.setNuttmeg(Integer.parseInt(etNuttmeg.getText().toString()));*/
 
         db.setCurrentPlayer(updatedPlayer);
 

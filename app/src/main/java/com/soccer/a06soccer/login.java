@@ -60,10 +60,6 @@ public class login  extends AppCompatActivity implements View.OnClickListener {
                 if (database.checkUserData(txtUsername.getText().toString(), txtPassword.getText().toString())) {
                     Intent intent = new Intent(this, MainActivity.class);
                     startActivity(intent);
-                } else {
-                    Toast.makeText(getApplicationContext(),
-                            "Wrong Password", Toast.LENGTH_SHORT)
-                            .show();
                 }
             }
         }
