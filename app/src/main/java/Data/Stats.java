@@ -5,8 +5,6 @@ package Data;
  */
 
 public class Stats {
-    private Float goalDifference = (float) 0.0;
-    private Boolean admin = false;
     private int goalDefault = 0;
     private int goalPenalty = 0;
     private int goalHeadSnow = 0;
@@ -16,22 +14,6 @@ public class Stats {
     public Stats()
     {
 
-    }
-
-    public Float getGoalDifference() {
-        return goalDifference;
-    }
-
-    public void setGoalDifference(Float goalDifference) {
-        this.goalDifference = goalDifference;
-    }
-
-    public Boolean getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
     }
 
     public int getGoalDefault() {

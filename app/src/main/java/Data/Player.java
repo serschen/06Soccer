@@ -24,6 +24,8 @@ public class Player implements Comparable<Player> {
     private Integer numDefeats = 0;
     private Integer numDraws = 0;
     private String password = null;
+    private Float goalDifference = (float) 0.0;
+    private Boolean admin = false;
     private Stats stats = new Stats();
 
     public Player()
@@ -158,20 +160,20 @@ public class Player implements Comparable<Player> {
         this.numDraws = numDraws;
     }
 
-    public float getGoalDifference() {
-        return stats.getGoalDifference();
+    public Float getGoalDifference() {
+        return goalDifference;
     }
 
-    public void setGoalDifference(float goalDifference) {
-        stats.setGoalDifference(goalDifference);
+    public void setGoalDifference(Float goalDifference) {
+        this.goalDifference = goalDifference;
     }
 
     public Boolean getAdmin() {
-        return stats.getAdmin();
+        return admin;
     }
 
     public void setAdmin(Boolean admin) {
-        stats.setAdmin(admin);
+        this.admin = admin;
     }
 
     public int getGoalDefault() {
