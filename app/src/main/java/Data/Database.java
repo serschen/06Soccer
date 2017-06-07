@@ -132,7 +132,7 @@ public class Database {
         currentGame.removePlayerTeamTwo(oldPlayer);
     }
 
-    public ArrayList<Player> getPlayers() throws ExecutionException, InterruptedException {
+    public void getFromServerPlayers() throws ExecutionException, InterruptedException {
         ArrayList<Player> list = null;
         String[] paras = new String[1];
         paras[0] = "/player/all";
@@ -143,7 +143,12 @@ public class Database {
         pch.execute(controller.get());
         list = pch.get();
 
-        return list;
+        tsPlayer = getSort(list);
+    }
+
+    public ArrayList<Player> getPlayers() throws ExecutionException, InterruptedException {
+        getFromServerPlayers();
+        return new ArrayList<>(tsPlayer);
     }
 
     public ArrayList<Game> getGames()
@@ -234,19 +239,23 @@ public class Database {
         return ret;
     }
 
-    public ArrayList<Player> getFilteredPlayer (String name)
-    {
-
+    public ArrayList<Player> getFilteredPlayer (String name) throws ExecutionException, InterruptedException {
+        filteredPlayer = new TreeSet<>();
         String currPlayerName = null;
         for(Player player : tsPlayer)
         {
-            currPlayerName = player.getName();
-            if(currPlayerName.contains(name))
-            {
-                filteredPlayer.add(player);
-            }
+                currPlayerName = player.getName();
+                if (currPlayerName.contains(name)) {
+                    filteredPlayer.add(player);
+                }
         }
-        return new ArrayList<>(filteredPlayer);
+        return new ArrayList<Player>(filteredPlayer);
+    }
+
+    public static TreeSet<Player> getSort(ArrayList list)
+    {
+        TreeSet<Player> treeSet = new TreeSet<>(list);
+        return treeSet;
     }
 
     public static String convertPassMd5(String pass) {

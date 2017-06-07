@@ -143,7 +143,13 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         else if(v == btnSearchDialog)
         {
             dialogSearch.hide();
-            updateList(etSearch.getText().toString());
+            try {
+                updateList(etSearch.getText().toString());
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
             etSearch.setText("");
 
         }
@@ -256,8 +262,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         }
     }
 
-    public void updateList(String name)
-    {
+    public void updateList(String name) throws ExecutionException, InterruptedException {
         adapter = new ArrayAdapter<>(
                 this,
                 android.R.layout.simple_list_item_1,

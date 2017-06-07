@@ -30,6 +30,7 @@ public class Player implements Comparable<Player> {
     private int goalHeadSnow = 0;
     private int goalOwn = 0;
     private int nuttmeg = 0;
+    private String password = null;
 
     public Player()
     {
@@ -227,5 +228,13 @@ public class Player implements Comparable<Player> {
     @Override
     public int compareTo(@NonNull Player o) {
         return this.getId() - o.getId();
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
