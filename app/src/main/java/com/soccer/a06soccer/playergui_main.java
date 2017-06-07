@@ -119,6 +119,8 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
                 }
                 dialog.hide();
                 txtNameDialog.setText("");
+                txtUsername.setText("");
+                txtPassword.setText("");
             }
             else
             {
@@ -131,6 +133,8 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
         {
             dialog.hide();
             txtNameDialog.setText("");
+            txtUsername.setText("");
+            txtPassword.setText("");
         }
         else if(v == btnSearch)
         {
@@ -197,7 +201,7 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     public void addPlayer() throws ExecutionException, InterruptedException {
         try {
             Player player = new Player(null, txtNameDialog.getText().toString(), txtUsername.getText().toString(), true);
-            database.addPlayer(player);
+            database.addPlayer(player, txtPassword.getText().toString());
             updatePlayerList();
             Toast.makeText(getApplicationContext(),
                     "Added", Toast.LENGTH_SHORT)
