@@ -23,14 +23,8 @@ public class Player implements Comparable<Player> {
     private Integer numWins = 0;
     private Integer numDefeats = 0;
     private Integer numDraws = 0;
-    private Float goalDifference = (float) 0.0;
-    private Boolean admin = false;
-    private int goalDefault = 0;
-    private int goalPenalty = 0;
-    private int goalHeadSnow = 0;
-    private int goalOwn = 0;
-    private int nuttmeg = 0;
     private String password = null;
+    private Stats stats = new Stats();
 
     public Player()
     {
@@ -165,59 +159,59 @@ public class Player implements Comparable<Player> {
     }
 
     public float getGoalDifference() {
-        return goalDifference;
+        return stats.getGoalDifference();
     }
 
     public void setGoalDifference(float goalDifference) {
-        this.goalDifference = goalDifference;
+        stats.setGoalDifference(goalDifference);
     }
 
     public Boolean getAdmin() {
-        return admin;
+        return stats.getAdmin();
     }
 
     public void setAdmin(Boolean admin) {
-        this.admin = admin;
+        stats.setAdmin(admin);
     }
 
     public int getGoalDefault() {
-        return goalDefault;
+        return stats.getGoalDefault();
     }
 
     public void setGoalDefault(int goalDefault) {
-        this.goalDefault = goalDefault;
+        stats.setGoalDefault(goalDefault);
     }
 
     public int getGoalPenalty() {
-        return goalPenalty;
+        return stats.getGoalPenalty();
     }
 
     public void setGoalPenalty(int goalPenalty) {
-        this.goalPenalty = goalPenalty;
+        stats.setGoalPenalty(goalPenalty);
     }
 
     public int getGoalHeadSnow() {
-        return goalHeadSnow;
+        return stats.getGoalHeadSnow();
     }
 
     public void setGoalHeadSnow(int goalHeadSnow) {
-        this.goalHeadSnow = goalHeadSnow;
+        stats.setGoalHeadSnow(goalHeadSnow);
     }
 
     public int getGoalOwn() {
-        return goalOwn;
+        return stats.getGoalOwn();
     }
 
     public void setGoalOwn(int goalOwn) {
-        this.goalOwn = goalOwn;
+        stats.setGoalOwn(goalOwn);
     }
 
     public int getNuttmeg() {
-        return nuttmeg;
+        return stats.getNuttmeg();
     }
 
     public void setNuttmeg(int nuttmeg) {
-        this.nuttmeg = nuttmeg;
+        stats.setNuttmeg(nuttmeg);
     }
 
     public String toString()

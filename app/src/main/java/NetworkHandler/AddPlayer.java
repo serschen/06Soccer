@@ -39,7 +39,10 @@ public class AddPlayer extends AsyncTask<Player, Void, String> {
 
         try {
             httpPost.setEntity(new StringEntity(json, "UTF8"));
-            client.execute(httpPost);
+            HttpResponse r = client.execute(httpPost);
+            System.out.println(r.getStatusLine());
+            System.out.println(url);
+            System.out.println(json);
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
