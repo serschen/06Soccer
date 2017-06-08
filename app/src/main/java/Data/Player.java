@@ -2,9 +2,6 @@ package Data;
 
 import android.support.annotation.NonNull;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.TreeSet;
 
@@ -13,20 +10,14 @@ import java.util.TreeSet;
  */
 
 public class Player implements Comparable<Player> {
-
-    private Integer id = 0;
+    private int ID = 0;
     private String name = "";
-    private String username = "";
-    //@SerializedName("positions")
     private TreeSet<Position> tsPosition = null;
-    private ArrayList<Position> positions = null;
-    private Integer numWins = 0;
-    private Integer numDefeats = 0;
-    private Integer numDraws = 0;
-    private String password = null;
-    private Float goalDifference = (float) 0.0;
-    private Boolean admin = false;
-    private Stats stats = new Stats();
+    private int goalDefault = 0;
+    private int goalPenalty = 0;
+    private int goalHeadSnow = 0;
+    private int goalOwn = 0;
+    private int nuttmeg = 0;
 
     public Player()
     {
@@ -38,40 +29,17 @@ public class Player implements Comparable<Player> {
     {
         super();
         tsPosition = new TreeSet<>();
-        setId(id);
+        setID(id);
         setName(name);
         setTsPositions(positions);
     }
 
-    public Player(int id, String name, String username, TreeSet<Position> positions, int numWins, int numDefeats, int numDraws, float goalDifference, Boolean admin)
-    {
-        super();
-
-        setId(id);
-        setName(name);
-        setUsername(username);
-        setTsPositions(positions);
-        setNumWins(numWins);
-        setNumDefeats(numDefeats);
-        setNumDraws(numDraws);
-        setGoalDifference(goalDifference);
-        setAdmin(admin);
+    public int getID() {
+        return ID;
     }
 
-    public Player(ArrayList<Position> positions, String name, String username, Boolean admin)
-    {
-        this.positions = positions;
-        setName(name);
-        setUsername(username);
-        setAdmin(admin);
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int Id) {
-        this.id = Id;
+    public void setID(int ID) {
+        this.ID = ID;
     }
 
     public String getName() {
@@ -120,117 +88,53 @@ public class Player implements Comparable<Player> {
         }
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public TreeSet<Position> getTsPosition() {
-        return tsPosition;
-    }
-
-    public void setTsPosition(TreeSet<Position> tsPosition) {
-        this.tsPosition = tsPosition;
-    }
-
-    public int getNumWins() {
-        return numWins;
-    }
-
-    public void setNumWins(int numWins) {
-        this.numWins = numWins;
-    }
-
-    public int getNumDefeats() {
-        return numDefeats;
-    }
-
-    public void setNumDefeats(int numDefeats) {
-        this.numDefeats = numDefeats;
-    }
-
-    public int getNumDraws() {
-        return numDraws;
-    }
-
-    public void setNumDraws(int numDraws) {
-        this.numDraws = numDraws;
-    }
-
-    public Float getGoalDifference() {
-        return goalDifference;
-    }
-
-    public void setGoalDifference(Float goalDifference) {
-        this.goalDifference = goalDifference;
-    }
-
-    public Boolean getAdmin() {
-        return admin;
-    }
-
-    public void setAdmin(Boolean admin) {
-        this.admin = admin;
-    }
-
     public int getGoalDefault() {
-        return stats.getGoalDefault();
+        return goalDefault;
     }
 
     public void setGoalDefault(int goalDefault) {
-        stats.setGoalDefault(goalDefault);
+        this.goalDefault = goalDefault;
     }
 
     public int getGoalPenalty() {
-        return stats.getGoalPenalty();
+        return goalPenalty;
     }
 
     public void setGoalPenalty(int goalPenalty) {
-        stats.setGoalPenalty(goalPenalty);
+        this.goalPenalty = goalPenalty;
     }
 
     public int getGoalHeadSnow() {
-        return stats.getGoalHeadSnow();
+        return goalHeadSnow;
     }
 
     public void setGoalHeadSnow(int goalHeadSnow) {
-        stats.setGoalHeadSnow(goalHeadSnow);
+        this.goalHeadSnow = goalHeadSnow;
     }
 
     public int getGoalOwn() {
-        return stats.getGoalOwn();
+        return goalOwn;
     }
 
     public void setGoalOwn(int goalOwn) {
-        stats.setGoalOwn(goalOwn);
+        this.goalOwn = goalOwn;
     }
 
     public int getNuttmeg() {
-        return stats.getNuttmeg();
+        return nuttmeg;
     }
 
     public void setNuttmeg(int nuttmeg) {
-        stats.setNuttmeg(nuttmeg);
+        this.nuttmeg = nuttmeg;
     }
 
     public String toString()
     {
-        return getId() + " | " + getName();
+        return getID() + " | " + getName();
     }
 
     @Override
     public int compareTo(@NonNull Player o) {
-        return this.getId() - o.getId();
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
+        return this.getID() - o.getID();
     }
 }
