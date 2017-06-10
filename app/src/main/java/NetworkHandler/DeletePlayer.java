@@ -44,7 +44,7 @@ public class DeletePlayer extends AsyncTask<Player, Void, String> {
             }
             else if(status == 200)
             {
-                ret = "Deleted";
+                ret = params[0].getName() + " deleted";
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

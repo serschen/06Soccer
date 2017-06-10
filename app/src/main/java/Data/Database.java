@@ -30,6 +30,7 @@ import NetworkHandler.DeletePlayer;
 import NetworkHandler.PlayerCollectionHandler;
 import NetworkHandler.PlayerHandler;
 import NetworkHandler.SetPassword;
+import NetworkHandler.UpdatePlayer;
 
 /**
  * Created by anton on 27.03.2017.
@@ -78,14 +79,15 @@ public class Database {
         return gameId;
     }
 
-    public void addPlayer(Player p, String password)
-    {
+    public String addPlayer(Player p) throws ExecutionException, InterruptedException {
+        String ret = null;
         Player[] player = new Player[1];
         player[0] = p;
         AddPlayer addPlayer = new AddPlayer();
         addPlayer.execute(player);
+        ret = addPlayer.get();
 
-        //setPassword(p, password);
+        return ret;
     }
 
     public String removePlayer(Player p) throws ExecutionException, InterruptedException {
@@ -96,14 +98,21 @@ public class Database {
         return deletePlayer.get();
     }
 
-    public void setPassword(Player player, String password)
+    public Player getLastPlayer()
     {
+        return tsPlayer.last();
+    }
+
+    public String setPassword(Player player, String password) throws ExecutionException, InterruptedException {
         player.setPassword(convertPassMd5(password));
         Player[] p = new Player[1];
         p[0] = player;
 
         SetPassword setPassword = new SetPassword();
         setPassword.execute(p);
+        String ret = setPassword.get();
+
+        return  ret;
     }
 
     public void addGame(Game g)
@@ -148,6 +157,15 @@ public class Database {
 
     public ArrayList<Player> getPlayers() throws ExecutionException, InterruptedException {
         getFromServerPlayers();
+        return new ArrayList<>(tsPlayer);
+    }
+
+    public ArrayList<Player> getLocalPlayers() throws ExecutionException, InterruptedException {
+        if(tsPlayer == null)
+        {
+            getFromServerPlayers();
+        }
+
         return new ArrayList<>(tsPlayer);
     }
 
@@ -331,4 +349,12 @@ public class Database {
         return retValue;
     }
 
+    public String updatePlayer(Player player) throws ExecutionException, InterruptedException {
+        Player[] p = new Player[1];
+        p[0] = player;
+        UpdatePlayer updatePlayer = new UpdatePlayer();
+        updatePlayer.execute(p);
+        String ret = updatePlayer.get();
+        return ret;
+    }
 }

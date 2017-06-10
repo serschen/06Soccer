@@ -176,9 +176,9 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
             Player curPlayer = database.getCurrentPlayer();
             if(curPosition != -1)
             {
-                database.removePlayer(curPlayer);
+                String r = database.removePlayer(curPlayer);
                 Toast.makeText(getApplicationContext(),
-                        "Removed", Toast.LENGTH_SHORT)
+                        r, Toast.LENGTH_SHORT)
                         .show();
                 updatePlayerList();
                 curPosition = -1;
@@ -207,10 +207,11 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     public void addPlayer() throws ExecutionException, InterruptedException {
         try {
             Player player = new Player(null, txtNameDialog.getText().toString(), txtUsername.getText().toString(), true);
-            database.addPlayer(player, txtPassword.getText().toString());
+            String r = database.addPlayer(player);
             updatePlayerList();
+            String pr = database.setPassword(database.getLastPlayer(), txtPassword.getText().toString());
             Toast.makeText(getApplicationContext(),
-                    "Added", Toast.LENGTH_SHORT)
+                    r, Toast.LENGTH_SHORT)
                     .show();
         }
         catch(Exception ex)
@@ -275,5 +276,4 @@ public class playergui_main extends AppCompatActivity implements View.OnClickLis
     {
         dialogSearch.show();
     }
-
 }

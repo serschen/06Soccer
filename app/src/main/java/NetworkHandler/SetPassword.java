@@ -4,6 +4,8 @@ import android.os.AsyncTask;
 
 import com.google.gson.Gson;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -25,11 +27,15 @@ public class SetPassword extends AsyncTask<Player, Void, String> {
 
     @Override
     protected String doInBackground(Player... params) {
+        String ret = null;
         HttpClient client = new DefaultHttpClient();
-        HttpPut httpPut = new HttpPut(url + params[0].getId() + "?password=" + params[0].getPassword());
+        url += params[0].getId() + "?password=" + params[0].getPassword();
+        HttpPut httpPut = new HttpPut(url);
+        System.out.println(url);
 
         try {
-            client.execute(httpPut);
+            HttpResponse r = client.execute(httpPut);
+            ret = r.getStatusLine().toString();
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -38,6 +44,6 @@ public class SetPassword extends AsyncTask<Player, Void, String> {
             e.printStackTrace();
         }
 
-        return null;
+        return ret;
     }
 }

@@ -18,7 +18,6 @@ public class Player implements Comparable<Player> {
     private String name = "";
     private String username = "";
     //@SerializedName("positions")
-    private TreeSet<Position> tsPosition = null;
     private ArrayList<Position> positions = null;
     private Integer numWins = 0;
     private Integer numDefeats = 0;
@@ -31,26 +30,26 @@ public class Player implements Comparable<Player> {
     public Player()
     {
         super();
-        tsPosition = new TreeSet<>();
+        positions = new ArrayList<>();
     }
 
-    public Player(int id, String name, TreeSet<Position> positions)
+    public Player(int id, String name, ArrayList<Position> positions)
     {
         super();
-        tsPosition = new TreeSet<>();
+        positions = new ArrayList<>();
         setId(id);
         setName(name);
-        setTsPositions(positions);
+        setPositions(positions);
     }
 
-    public Player(int id, String name, String username, TreeSet<Position> positions, int numWins, int numDefeats, int numDraws, float goalDifference, Boolean admin)
+    public Player(int id, String name, String username, ArrayList<Position> positions, int numWins, int numDefeats, int numDraws, float goalDifference, Boolean admin)
     {
         super();
 
         setId(id);
         setName(name);
         setUsername(username);
-        setTsPositions(positions);
+        setPositions(positions);
         setNumWins(numWins);
         setNumDefeats(numDefeats);
         setNumDraws(numDraws);
@@ -82,15 +81,12 @@ public class Player implements Comparable<Player> {
         this.name = name;
     }
 
-    public TreeSet<Position> getTsPositions() {
-        return tsPosition;
-    }
-
-    public void setTsPositions(TreeSet<Position> tsPosition) {
-        this.tsPosition = tsPosition;
+    public void setPositions(ArrayList<Position> positions) {
+        this.positions = positions;
     }
 
     public String getPositionString() {
+        TreeSet<Position> tsPosition = new TreeSet<>(positions);
         String positions = null;
 
         for (Position pos : tsPosition)
@@ -101,22 +97,22 @@ public class Player implements Comparable<Player> {
     }
 
     public ArrayList<Position> getPositions() {
-        return new ArrayList<>(tsPosition);
+        return positions;
     }
 
     public void addPosition(Position position)
     {
-        if(tsPosition.contains(position) == false)
+        if(!positions.contains(position))
         {
-            tsPosition.add(position);
+            positions.add(position);
         }
     }
 
     public void removePosition(Position position)
     {
-        if(tsPosition.contains(position) == true)
+        if(positions.contains(position))
         {
-            tsPosition.remove(position);
+            positions.remove(position);
         }
     }
 
@@ -126,14 +122,6 @@ public class Player implements Comparable<Player> {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public TreeSet<Position> getTsPosition() {
-        return tsPosition;
-    }
-
-    public void setTsPosition(TreeSet<Position> tsPosition) {
-        this.tsPosition = tsPosition;
     }
 
     public int getNumWins() {

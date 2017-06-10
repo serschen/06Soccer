@@ -46,7 +46,7 @@ public class teampicker_gui extends AppCompatActivity implements View.OnClickLis
             getAllViews();
             registrateEventHandlers();
             db = Database.getInstance();
-            alPlayerAll = db.getPlayers();
+            alPlayerAll = db.getLocalPlayers();
             teamSelected = getIntent().getStringExtra("TEAM SELECTED");
 
             if (teamSelected.equals("T1")) {

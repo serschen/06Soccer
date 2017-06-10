@@ -31,6 +31,7 @@ public class AddPlayer extends AsyncTask<Player, Void, String> {
 
     @Override
     protected String doInBackground(Player... params) {
+        String ret = null;
         Gson gson = new Gson();
         HttpClient client = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(url);
@@ -43,6 +44,15 @@ public class AddPlayer extends AsyncTask<Player, Void, String> {
             System.out.println(r.getStatusLine());
             System.out.println(url);
             System.out.println(json);
+
+            if(r.getStatusLine().getStatusCode() == 200)
+            {
+                ret = params[0].getName() + " added";
+            }
+            else
+            {
+                ret = r.getStatusLine().toString();
+            }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         } catch (ClientProtocolException e) {
@@ -51,6 +61,6 @@ public class AddPlayer extends AsyncTask<Player, Void, String> {
             e.printStackTrace();
         }
 
-        return null;
+        return ret;
     }
 }

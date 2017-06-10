@@ -8,7 +8,9 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.TreeSet;
+import java.util.concurrent.ExecutionException;
 
 import Data.Database;
 import Data.Player;
@@ -26,7 +28,7 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
     private CheckBox cbForward = null;
     private TextView txtPlayerName = null;
     private Player player = null;
-    private TreeSet<Position> tsPosition = null;
+    private ArrayList<Position> positions = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,12 +51,12 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
     public void getData()
     {
         player = database.getCurrentPlayer();
-        tsPosition = player.getTsPositions();
+        positions = player.getPositions();
         txtPlayerName.setText(player.getName());
 
-        if(tsPosition == null)
+        if(positions == null)
         {
-            tsPosition = new TreeSet<>();
+            positions = new ArrayList<>();
         }
     }
 
@@ -76,25 +78,21 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
 
     public void setPositionBoxes()
     {
-        if(tsPosition != null)
+        if(positions != null)
         {
-            if(tsPosition.contains(Position.DEFENDER))
+            if(positions.contains(Position.DEFENSE))
             {
                 cbDefender.setChecked(true);
             }
-            if(tsPosition.contains(Position.MIDFIELDER))
+            if(positions.contains(Position.MIDFIELD))
             {
                 cbMidfielder.setChecked(true);
             }
-            if(tsPosition.contains(Position.ATTACK))
+            if(positions.contains(Position.ATTACK))
             {
                 cbForward.setChecked(true);
             }
-            if(tsPosition.contains(Position.DEFENDER))
-            {
-                cbDefender.setChecked(true);
-            }
-            if(tsPosition.contains(Position.GOALIE))
+            if(positions.contains(Position.GOAL))
             {
                 cbGoalie.setChecked(true);
             }
@@ -107,28 +105,50 @@ public class positiongui extends AppCompatActivity implements CheckBox.OnChecked
             Position pos = null;
 
             if (buttonView == cbGoalie) {
-                pos = Position.GOALIE;
+                pos = Position.GOAL;
             } else if (buttonView == cbDefender) {
-                pos = Position.DEFENDER;
+                pos = Position.DEFENSE;
             } else if (buttonView == cbForward) {
                 pos = Position.ATTACK;
             } else if (buttonView == cbMidfielder) {
-                pos = Position.MIDFIELDER;
+                pos = Position.MIDFIELD;
             }
 
             if (isChecked == true) {
-                tsPosition.add(pos);
+                if(!positions.contains(pos)) {
+                    positions.add(pos);
+                }
             } else {
-                tsPosition.remove(pos);
+                if(positions.contains(pos)) {
+                    positions.remove(pos);
+                }
             }
 
-            player.setTsPositions(tsPosition);
+            player.setPositions(positions);
         }
         catch(Exception ex)
         {
             Toast.makeText(getApplicationContext(),
                     ex.getMessage(), Toast.LENGTH_LONG)
                     .show();
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        try {
+            String ret = database.updatePlayer(player);
+
+            Toast.makeText(getApplicationContext(),
+                    ret, Toast.LENGTH_SHORT)
+                    .show();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        finally {
+            super.onBackPressed();
         }
     }
 }
